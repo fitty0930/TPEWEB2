@@ -32,7 +32,7 @@
 
                     <div class="input-group">
                     <select class="custom-select" name="categoria" id="categoria"> {* se llama nombre dentro de categorias y id-cat dentro de productos*}
-                        <option selected > Elija una categoria </option>
+                        {* <option selected > Elija una categoria </option> *}
                         {* aca selecciono categorias *}
                         {foreach $categorias as $categoria}
                             <option value="{$categoria->id_categoria}">{$categoria->nombre}</option>
