@@ -15,6 +15,7 @@
             <form action="nuevacategoria" method="POST">
                 <label>Nombre</label>
                 <input class="form-control" type="text" name="nombre">
+                <br>
                 <button type="submit" class="btn btn-primary"> Agregar </button>
             </form>
         </div>

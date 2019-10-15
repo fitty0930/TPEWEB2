@@ -29,16 +29,18 @@
                     <label> Precio del producto</label>
                     <input class="form-control" type="number" name="precio" placeholder="1000"> {* se llama precio*}
                     </div>
-                    <label> Elija una categoria </label>
-                    <div class="input-group">
                     
+                    <label> Categoria </label>
+                    <div class="input-group">
                     <select class="custom-select" name="categoria" id="categoria"> {* se llama nombre dentro de categorias y id-cat dentro de productos*}
+                        <option selected value="" > Elija una categoria </option>
                         {* aca selecciono categorias *}
                         {foreach $categorias as $categoria}
                             <option value="{$categoria->id_categoria}">{$categoria->nombre}</option>
                         {/foreach}
                     </select>
                     </div>
+                <br>
                 <button type="submit" class="btn btn-primary"> Agregar Producto </button>
             </form>
         </div>

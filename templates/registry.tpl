@@ -18,7 +18,7 @@
             <input type="text" class="form-control" placeholder="Cuentanos tu historia">
         </div>
 
-        {* agragar captcha *}
+        
         <div class="g-recaptcha" data-sitekey="{$webkey}"></div>
         {* clave del sitio entre comillas *}
         {if $error}
