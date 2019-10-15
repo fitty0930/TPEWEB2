@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2019 a las 01:40:07
+-- Tiempo de generación: 15-10-2019 a las 21:27:45
 -- Versión del servidor: 10.4.6-MariaDB
 -- Versión de PHP: 7.3.9
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `id_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
   PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `categorias`
@@ -53,7 +53,8 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
 
 CREATE TABLE IF NOT EXISTS `gcaptcha` (
   `web_key` varchar(200) NOT NULL,
-  `secret_key` varchar(200) NOT NULL
+  `secret_key` varchar(200) NOT NULL,
+  PRIMARY KEY (`web_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -77,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `precio` int(11) NOT NULL,
   PRIMARY KEY (`id_producto`),
   KEY `id_categoría` (`id_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -86,7 +87,8 @@ CREATE TABLE IF NOT EXISTS `productos` (
 INSERT INTO `productos` (`id_producto`, `id_categoria`, `producto`, `marca`, `precio`) VALUES
 (7, 1, 'Auriculares', 'Genius', 200),
 (13, 3, 'Playstation', 'Sony', 1000),
-(14, 2, 'S3', 'Motorola', 200);
+(14, 2, 'S3', 'Motorola', 200),
+(16, 3, 'Playstation', 'Sony', 1000);
 
 -- --------------------------------------------------------
 
