@@ -129,8 +129,14 @@
             
             $this->authHelper->checkLoggedIn();
 
+            $categorias = $this->modelCategoria->GetCategorias();
+            $puedoBorrar=$this->modelProducto->GetProductoPorCategoria($id_categoria);
+            if($puedoBorrar==[]){
             $this->modelCategoria->BorrarCategoria($id_categoria);
-            header('Location: ../categorias');
+            header('Location: ../categorias');}
+            else{
+            $this->view_User->MsjError('No puede borrar categorias que tengan productos, elimine los productos para poder eliminar la categoria',$categorias);
+            }
         }
 
         
