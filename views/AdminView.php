@@ -34,12 +34,4 @@
             $this->smarty->display('templates/EditarCategoria.tpl');
         }
 
-
-        public function MostrarMsjError($MsjError, $categorias){
-            $this->smarty->assign('titulo', 'Dificultades tecnicas');
-            $this->smarty->assign('categorias', $categorias);
-            $this->smarty->assign('MsjError', $MsjError);
-            $this->smarty->display("templates/MostrarError.tpl");
-            
-        }
     }

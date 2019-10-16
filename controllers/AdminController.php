@@ -63,12 +63,10 @@
             if ((!empty($producto)) && (!empty($marca)) && (!empty($precio))  && (!empty($id_categoria)) ){
                 $this->modelProducto->AgregarProducto($id_categoria, $producto, $marca, $precio); 
                 header("Location: productos"); // lo pateo a home
-            } else
-            $this->view_Admin->MostrarMsjError("Datos insuficientes", $categorias); 
+            } else{
+            $this->view_User->MsjError('No se encontró su producto ',$categorias); }
         }
 
-
-        
 
         public function BorrarProducto($id_producto) { 
             
