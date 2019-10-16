@@ -101,7 +101,7 @@
             $producto = $_POST['producto'];
             $marca = $_POST['marca'];
             $precio = $_POST['precio'];
-            
+            $categorias = $this->modelCategoria->GetCategorias();
 
             if ((!empty($producto)) && (!empty($marca)) && (!empty($precio))  && (!empty($id_categoria))){
                 $this->modelProducto->EditarProducto($id_producto, $id_categoria, $producto, $marca, $precio);
@@ -115,7 +115,7 @@
         public function AgregarCategoria(){ 
             $this->authHelper->checkLoggedIn();
             $nombre= $_POST['nombre']; 
-            
+            $categorias = $this->modelCategoria->GetCategorias();
             if(!empty($nombre)){
                 $this->modelCategoria->AgregarCategoria($nombre);
                 header('Location: categorias');
@@ -156,21 +156,20 @@
         public function EditarCategoriaSelec($id_categoria){
             
             $this->authHelper->checkLoggedIn();
-            
+            $categorias = $this->modelCategoria->GetCategorias();
             $nombre= $_POST['nombre'];
+
             if(!empty($nombre)){
                 $this->modelCategoria->EditarCategoria($nombre, $id_categoria); 
                 header("Location: ../categorias");
             }
-            else
+            else{
                 $this->view_User->MsjError("Por favor  ingrese un nombre",$categorias);
+            }
         }
 
         
-        public function MsjError($MsjError){
-            $categorias = $this->modelCategoria->GetCategorias();
-            $this->view_User->MsjError($MsjError,$categorias);
-        }
+        
     }
 
 ?>

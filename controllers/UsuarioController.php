@@ -52,9 +52,6 @@
                 $this->view->MsjError('No existe tal categoria',$categorias);}
         }
 
-        public function MsjError($MsjError){
-            $categorias = $this->modelCategoria->GetCategorias();
-            $this->view->MsjError($MsjError,$categorias);
-        }
+        
         
     }

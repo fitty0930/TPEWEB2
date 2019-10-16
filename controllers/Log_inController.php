@@ -53,7 +53,7 @@ include_once('helpers/AuthHelper.php');
                         if (isset($usuario) && password_verify($password, $usuario->password)) {
                             $this->authHelper->Log_in($usuario);
                             // var_dump($arr);
-                            header('Location: categorias');
+                            header('Location: productos');
                         } else {
                             $this->view->MostrarLog_in($categorias,$webkey, "Usuario o contraseña incorrectos");}
                     } else {
