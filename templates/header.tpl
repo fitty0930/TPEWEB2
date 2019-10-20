@@ -29,7 +29,7 @@
                   <li class="nav-item active">
                     <a class="nav-link" href="productos">Productos</a> {* te lleva a productos  *}
                   </li>
-                  {if $UsuarioAdm}
+                  {if $usuarioAdm}
                   <li class="nav-item active">
                     <a class="nav-item nav-link" href="categorias"> Administrar Categorias </a>
                   </li>
@@ -45,10 +45,10 @@
                   </li>
                 </ul>
 
-                {if $UsuarioAdm} {* tiene problemas *}
+                {if $usuarioAdm} {* tiene problemas *}
                 {* isset($smarty.session.id_usuario) ==  (isset($_SESSION['id_usuario'])) *}
                     <div class="navbar-nav ml-auto">
-                        <span class="navbar-text">{$UsuarioAdm}</span>
+                        <span class="navbar-text">{$usuarioAdm}</span>
                         <a class="nav-item nav-link" href="logout"> Salir </a>
                     </div> 
                     {else}

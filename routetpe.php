@@ -1,8 +1,8 @@
 <?php
 
-require_once "controllers/UsuarioController.php";
-require_once "controllers/Log_inController.php";
-require_once "controllers/AdminController.php";
+require_once "controllers/usuario.controller.php";
+require_once "controllers/login.controller.php";
+require_once "controllers/admin.controller.php";
 
 define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
 define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
@@ -19,61 +19,61 @@ $partesURL = explode("/", $action);
 switch ($partesURL[0]) {
     case 'home':
         $controller = new UsuarioController();
-        $controller->MostrarProductos();
+        $controller->mostrarProductos();
     break;
 
     case 'login':
-        $controller = new Log_inController();
-        $controller->MostrarLog_in();
+        $controller = new LoginController();
+        $controller->mostrarLogin();
     break;
 
     case 'checklogin':
-        $controller = new Log_inController();
-        $controller->VerificarUsuario();
+        $controller = new LoginController();
+        $controller->verificarUsuario();
     break;
 
     case 'logout':
-        $controller = new Log_inController();
-        $controller->Log_out();
+        $controller = new LoginController();
+        $controller->Logout();
     break;
 
     case 'registry':
-        $controller = new Log_inController();
-        $controller-> MostrarRegistro();
+        $controller = new LoginController();
+        $controller-> mostrarRegistro();
 
     break;
 
     case 'checkregistry':
-        $controller= new Log_inController();
+        $controller= new LoginController();
         $controller-> Registrar();
     break;
     // productos
     case 'productos':
         $controller = new UsuarioController();
         if (isset($partesURL[1]))
-        $controller-> MostrarProducto($partesURL[1]);
+        $controller-> mostrarProducto($partesURL[1]);
         else
-        $controller->MostrarProductos();
+        $controller->mostrarProductos();
     break;
 
     case 'nuevoproducto':
         $controller = new AdminController();
-        $controller->AgregarProducto();
+        $controller->agregarProducto();
     break;
 
     case 'borrarproducto':
         $controller = new AdminController();
-        $controller->BorrarProducto($partesURL[1]);
+        $controller->borrarProducto($partesURL[1]);
     break;
 
     case 'edicionproducto': // ????
         $controller = new AdminController();
-        $controller->EditarUnProducto($partesURL[1]);
+        $controller->editarUnProducto($partesURL[1]);
     break;
 
     case 'editarproducto':
         $controller = new AdminController();
-        $controller->EditarProductoSelec($partesURL[1]);
+        $controller->editarProductoSelec($partesURL[1]);
         // EditarProductoSelec($id_producto)
     break;
 
@@ -81,35 +81,35 @@ switch ($partesURL[0]) {
     case 'categorias':
         $controller= new UsuarioController();
         if (isset($partesURL[1]))
-        $controller-> MostrarCategoria($partesURL[1]);
+        $controller-> mostrarCategoria($partesURL[1]);
         else
-        $controller-> MostrarCategorias();
+        $controller-> mostrarCategorias();
     break;
 
     case 'nuevacategoria':
         $controller= new AdminController();
-        $controller-> AgregarCategoria();
+        $controller-> agregarCategoria();
     break;
     
     case 'borrarcategoria':
         $controller= new AdminController();
-        $controller-> BorrarCategoria($partesURL[1]);
+        $controller-> borrarCategoria($partesURL[1]);
     break;
     
     case 'edicioncategoria':
         $controller= new AdminController();
-        $controller->EditarUnaCategoria($partesURL[1]);
+        $controller->editarUnaCategoria($partesURL[1]);
     break;
     
     case 'editarcategoria':
         $controller= new AdminController();
-        $controller-> EditarCategoriaSelec($partesURL[1]);
+        $controller-> editarCategoriaSelec($partesURL[1]);
     break;    
     
 
     default:
         $controller = new UsuarioController();
-        $controller->MostrarProductos();
+        $controller->mostrarProductos();
     break;
     
 }

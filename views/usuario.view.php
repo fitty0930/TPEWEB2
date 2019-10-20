@@ -1,6 +1,6 @@
 <?php
     require_once('libs/Smarty.class.php');
-    require_once('helpers/AuthHelper.php');
+    require_once('helpers/auth.helper.php');
 
     class UsuarioView {
 
@@ -8,13 +8,13 @@
         
         public function __construct(){
             $authHelper = new AuthHelper();
-            $UsuarioAdm = $authHelper->ObtenerUsuarioAdm();
+            $usuarioAdm = $authHelper->obtenerUsuarioAdm();
             $this->smarty = new Smarty();
             $this->smarty->assign('basehref', BASE_URL);
-            $this->smarty->assign('UsuarioAdm', $UsuarioAdm);
+            $this->smarty->assign('usuarioAdm', $usuarioAdm);
         }
 
-        public function MostrarProductos($productos, $categorias){
+        public function mostrarProductos($productos, $categorias){
             $this->smarty->assign('titulo', 'Todos los productos');
             $this->smarty->assign('productos', $productos);
             $this->smarty->assign('categorias', $categorias);
@@ -22,20 +22,20 @@
         }
         
 
-        public function MostrarProducto($producto , $categorias){ 
+        public function mostrarProducto($producto , $categorias){ 
             $this->smarty->assign('titulo', $producto->producto);
             $this->smarty->assign('producto', $producto);
             $this->smarty->assign('categorias', $categorias);
             $this->smarty->display('templates/MostrarProducto.tpl'); 
         }
 
-        public function MostrarCategorias($categorias){
+        public function mostrarCategorias($categorias){
             $this->smarty->assign('titulo', 'categorias');
             $this->smarty->assign('categorias', $categorias);
             $this->smarty->display("templates/MostrarCategorias.tpl");    
         }
 
-        public function FiltradoCategoria($categoria, $categorias, $productoporcategoria){
+        public function filtradoCategoria($categoria, $categorias, $productoporcategoria){
             $this->smarty->assign('titulo', 'categoria '.$categoria->nombre);
             $this->smarty->assign('categoria', $categoria);
             $this->smarty->assign('categorias', $categorias);
@@ -44,7 +44,7 @@
             $this->smarty->display("templates/MostrarFiltroCategoria.tpl");
         }
         
-        public function MsjError($MsjError, $categorias) {
+        public function msjError($MsjError, $categorias) {
             $this->smarty->assign('titulo', 'Dificultades tecnicas');
             $this->smarty->assign('categorias', $categorias);
             $this->smarty->assign('MsjError', $MsjError);

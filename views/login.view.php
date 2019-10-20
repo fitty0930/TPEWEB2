@@ -1,33 +1,33 @@
 <?php
     require_once('libs/Smarty.class.php');
-    require_once('helpers/AuthHelper.php');
+    require_once('helpers/auth.helper.php');
 
-    class Log_inView{
+    class LoginView{
         private $smarty;
 
         public function __construct() {
             $authHelper = new AuthHelper();
-            $UsuarioAdm = $authHelper->ObtenerUsuarioAdm();
+            $usuarioAdm = $authHelper->obtenerUsuarioAdm();
             $this->smarty = new Smarty();
             $this->smarty->assign('basehref', BASE_URL);
-            $this->smarty->assign('UsuarioAdm', $UsuarioAdm);
+            $this->smarty->assign('usuarioAdm', $usuarioAdm);
         }
 
-        public function MostrarLog_in($categorias,$webkey, $error = NULL) { // si el parametro no existe, asigno null
+        public function mostrarLogin($categorias,$webkey, $error = NULL) { // si el parametro no existe, asigno null
             $this->smarty->assign('titulo', 'Bienvenido');
             $this->smarty->assign('error', $error);
             $this->smarty->assign('categorias', $categorias);
             $this->smarty->assign('webkey', $webkey);
             
-            $this->smarty->display('templates/log_in.tpl');
+            $this->smarty->display('templates/Login.tpl');
         }
 
-        public function MostrarRegistro($categorias,$webkey, $error = NULL) { 
+        public function mostrarRegistro($categorias,$webkey, $error = NULL) { 
             $this->smarty->assign('titulo', 'Abre una cuenta, es rápido y fácil.');
             $this->smarty->assign('error', $error);
             $this->smarty->assign('categorias', $categorias);
             $this->smarty->assign('webkey', $webkey);
             
-            $this->smarty->display('templates/registry.tpl'); 
+            $this->smarty->display('templates/Registry.tpl'); 
         }
     }

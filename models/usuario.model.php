@@ -14,7 +14,7 @@
             , 'root', '');// el primer root es el usuario y el segundo (vacio) la contraseña
         }
 
-        public function Get_Usuario($nombre_usuario) { // elige por nombre de usuario
+        public function getUsuario($nombre_usuario) { // Get_Usuario
             $sentencia = $this->db->prepare('SELECT * FROM usuarios WHERE nombre_usuario = ?');
             $sentencia->execute(array($nombre_usuario));
     
@@ -26,11 +26,10 @@
             $sentencia->execute([$nombre_usuario, $password]);
         }
 
-        public function CaptchaSecretKey(){
+        public function captchaSecretKey(){
             $sentencia = $this->db->prepare('SELECT * FROM gcaptcha');
             $sentencia -> execute();
             // var_dump($sentencia);
             return $sentencia->fetch(PDO::FETCH_OBJ);
         }
     }
-?>

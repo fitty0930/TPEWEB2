@@ -3,7 +3,7 @@
     class AuthHelper{
         public function __construct(){}
         
-        public function Log_in($usuario){ 
+        public function Login($usuario){ 
             session_start();
 
             $_SESSION['id_usuario'] = $usuario->id_usuario;
@@ -11,7 +11,7 @@
 
         }
 
-        public function Log_out(){
+        public function Logout(){
             session_start();
             session_destroy();
         }
@@ -23,7 +23,7 @@
             }    
         }
 
-        public function ObtenerUsuarioAdm(){ 
+        public function obtenerUsuarioAdm(){ 
             if(session_status() != PHP_SESSION_ACTIVE)
                 session_start();
             if(!isset($_SESSION['id_usuario'])){

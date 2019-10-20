@@ -6,14 +6,14 @@
             {* imprimo con un foreach a cada cosa del objeto productos lo subdivido e imprimo *}
             {foreach $productos as $producto}
                 <li class="list-group-item">{$producto->nombre}  ----  {$producto->producto} ---- {$producto->marca} --- Precio:${$producto->precio} 
-                {if $UsuarioAdm}
+                {if $usuarioAdm}
                 <a href="borrarproducto/{$producto->id_producto}"> Borrar </a>|<a href="edicionproducto/{$producto->id_producto}"> Modificar </a>
                 {/if}
                 </li>      
             {/foreach}
         </ul>
     </div>
-    {if $UsuarioAdm}
+    {if $usuarioAdm}
     <div class="container">
         <div class="form-group">
             <br>

@@ -1,6 +1,6 @@
 <?php
     require_once('libs/Smarty.class.php');
-    require_once('helpers/AuthHelper.php');
+    require_once('helpers/auth.helper.php');
 
     class AdminView{
 
@@ -10,14 +10,14 @@
         public function __construct(){
             $authHelper = new AuthHelper();
             $this->smarty= new Smarty();
-            $UsuarioAdm = $authHelper->ObtenerUsuarioAdm();
+            $usuarioAdm = $authHelper->obtenerUsuarioAdm();
             
             $this->smarty->assign('basehref', BASE_URL);
-            $this->smarty->assign('UsuarioAdm', $UsuarioAdm); // este es el del logueo
+            $this->smarty->assign('usuarioAdm', $usuarioAdm); // este es el del logueo
         }
         
 
-        public function EditarProducto($producto, $categorias, $selector){ 
+        public function editarProducto($producto, $categorias, $selector){ 
             // var_dump($producto);
             $this->smarty->assign('titulo', 'Editar '.$producto->producto);
             $this->smarty->assign('producto', $producto);
@@ -27,7 +27,7 @@
         }
         
 
-        public function EditarCategoria($categoria, $categorias){ 
+        public function editarCategoria($categoria, $categorias){ 
             $this->smarty->assign('titulo', 'edit'.$categoria->nombre);
             $this->smarty->assign('categoria', $categoria);
             $this->smarty->assign('categorias', $categorias);

@@ -1,44 +1,44 @@
 <?php
-include_once('views/Log_inView.php');
-include_once('models/UsuarioModel.php');
-include_once('models/CategoriaModel.php');
-include_once('helpers/AuthHelper.php');
+include_once('views/login.view.php');
+include_once('models/usuario.model.php');
+include_once('models/categoria.model.php');
+include_once('helpers/auth.helper.php');
 
-    class Log_inController{
+    class LoginController{
         private $view;
         private $modelUsuario;
         private $modelCategoria; 
         private $authHelper;
         
         public function __construct(){
-            $this->view = new Log_inView();
+            $this->view = new LoginView();
             $this->modelUsuario = new UsuarioModel();
             $this->modelCategoria = new CategoriaModel(); 
             $this->authHelper = new AuthHelper();
 
         }
-        public function MostrarLog_in(){
-            $categorias= $this->modelCategoria->GetCategorias();
-            $wkeycaptcha = $this->modelUsuario->CaptchaSecretKey();
+        public function mostrarLogin(){
+            $categorias= $this->modelCategoria->getCategorias();
+            $wkeycaptcha = $this->modelUsuario->captchaSecretKey();
             $webkey= $wkeycaptcha->web_key;
-            $this->view->MostrarLog_in($categorias, $webkey);
+            $this->view->mostrarLogin($categorias, $webkey);
         }
 
-        public function VerificarUsuario(){
-            $categorias= $this->modelCategoria->GetCategorias();
+        public function verificarUsuario(){
+            $categorias= $this->modelCategoria->getCategorias();
 
             $nombre_usuario = $_POST['usuario'];
             $password = $_POST['password'];
             $captcha = $_POST['g-recaptcha-response'];
             // var_dump($captcha);
-            $skeycaptcha = $this->modelUsuario->CaptchaSecretKey();
+            $skeycaptcha = $this->modelUsuario->captchaSecretKey();
             // var_dump($skeycaptcha->secret_key);
             $secret = $skeycaptcha->secret_key;
             $webkey= $skeycaptcha->web_key;
-            $usuario = $this->modelUsuario->Get_Usuario($nombre_usuario);
+            $usuario = $this->modelUsuario->getUsuario($nombre_usuario);
 
             if(!$captcha){           
-                $this->view->MostrarLog_in($categorias, $webkey, "Completa el captcha");
+                $this->view->mostrarLogin($categorias, $webkey, "Completa el captcha");
             }
             else{  
                 		
@@ -51,39 +51,39 @@ include_once('helpers/AuthHelper.php');
                     if (!empty($nombre_usuario) && !empty($password)) {
                         
                         if (isset($usuario) && password_verify($password, $usuario->password)) {
-                            $this->authHelper->Log_in($usuario);
+                            $this->authHelper->Login($usuario);
                             // var_dump($arr);
                             header('Location: productos');
                         } else {
-                            $this->view->MostrarLog_in($categorias,$webkey, "Usuario o contraseña incorrectos");}
+                            $this->view->mostrarLogin($categorias,$webkey, "Usuario o contraseña incorrectos");}
                     } else {
-                        $this->view->MostrarLog_in($categorias,$webkey, "Quedan campos por rellenar");
+                        $this->view->mostrarLogin($categorias,$webkey, "Quedan campos por rellenar");
                     }
                 }else {
-                    $this->view->MostrarLog_in($categorias,$webkey, "error al verificar captcha");
+                    $this->view->mostrarLogin($categorias,$webkey, "error al verificar captcha");
                 }
             }
         }
         
-        public function Log_out() {
-            $this->authHelper->Log_out();
+        public function Logout() {
+            $this->authHelper->Logout();
             header('Location: home');
         }
 
-        public function MostrarRegistro(){
-            $categorias = $this->modelCategoria->GetCategorias();
+        public function mostrarRegistro(){
+            $categorias = $this->modelCategoria->getCategorias();
             // model usuario
-            $wkeycaptcha = $this->modelUsuario->CaptchaSecretKey();
+            $wkeycaptcha = $this->modelUsuario->captchaSecretKey();
             $webkey= $wkeycaptcha->web_key;
             $this->view->mostrarRegistro($categorias, $webkey); // crear el view
 
         }
         public function Registrar(){
-            $categorias = $this->modelCategoria->GetCategorias();
+            $categorias = $this->modelCategoria->getCategorias();
             $nombre_usuario = $_POST['usuario'];
             $password = $_POST['password'];
             $captcha = $_POST['g-recaptcha-response'];
-            $skeycaptcha = $this->modelUsuario->CaptchaSecretKey();
+            $skeycaptcha = $this->modelUsuario->captchaSecretKey();
             // var_dump($skeycaptcha->secret_key);
             $secret = $skeycaptcha->secret_key;
             $webkey= $skeycaptcha->web_key;
@@ -99,14 +99,14 @@ include_once('helpers/AuthHelper.php');
                     if($arr['success']){
                         if (!empty($nombre_usuario) && !empty($password) && ($nombre_usuario!="administrador")) {
 
-                            $yaesUsuario = $this->modelUsuario->Get_Usuario($nombre_usuario); // 
+                            $yaesUsuario = $this->modelUsuario->getUsuario($nombre_usuario); // 
         
                             if(!$yaesUsuario){
                                 $hash= password_hash($password, PASSWORD_DEFAULT);
                                 $this->modelUsuario->Registrar($nombre_usuario, $hash);
-                                $usuario= $this->modelUsuario->Get_Usuario($nombre_usuario);// buscar
+                                $usuario= $this->modelUsuario->getUsuario($nombre_usuario);// buscar
         
-                                $this->authHelper->Log_in($usuario);
+                                $this->authHelper->Login($usuario);
                                 header('Location: productos');
                             }
                             else{
