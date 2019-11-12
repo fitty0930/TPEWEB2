@@ -10,10 +10,13 @@
         public function __construct(){
             $authHelper = new AuthHelper();
             $this->smarty= new Smarty();
+
             $usuarioAdm = $authHelper->obtenerUsuarioAdm();
+            $adminAdm= $authHelper->obtenerAdminAdm(); // agregado para el administrador
             
             $this->smarty->assign('basehref', BASE_URL);
             $this->smarty->assign('usuarioAdm', $usuarioAdm); // este es el del logueo
+            $this->smarty->assign('adminAdm', $adminAdm); // este es el que verifica si es admin
         }
         
 
@@ -23,7 +26,7 @@
             $this->smarty->assign('producto', $producto);
             $this->smarty->assign('selector', $selector);
             $this->smarty->assign('categorias', $categorias);
-            $this->smarty->display('templates/EditarProducto.tpl');
+            $this->smarty->display('templates/editarProducto.tpl');
         }
         
 
@@ -31,7 +34,7 @@
             $this->smarty->assign('titulo', 'edit'.$categoria->nombre);
             $this->smarty->assign('categoria', $categoria);
             $this->smarty->assign('categorias', $categorias);
-            $this->smarty->display('templates/EditarCategoria.tpl');
+            $this->smarty->display('templates/editarCategoria.tpl');
         }
 
     }

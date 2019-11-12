@@ -4,12 +4,17 @@
         <ul class="list-group">
             {foreach $categorias as $categoria} 
                 <li class="list-group-item">
-                <a href="categorias/{$categoria->id_categoria}">{$categoria->nombre}</a> --------
-                <a href="edicioncategoria/{$categoria->id_categoria}">Editar</a>|  
-                <a href="borrarcategoria/{$categoria->id_categoria}">Eliminar</a> 
+                <a href="categorias/{$categoria->id_categoria}">{$categoria->nombre}</a>
+                {if $adminAdm != 0}
+                    --------
+                    <a href="edicioncategoria/{$categoria->id_categoria}">Editar</a>|  
+                    <a href="borrarcategoria/{$categoria->id_categoria}">Eliminar</a> 
                 </li>
+                {/if}
             {/foreach}
         </ul>
+
+        {if $adminAdm != 0}
         <h2> Formulario de mantenimiento </h2>
         <div class="form-group">
             <form action="nuevacategoria" method="POST">
@@ -19,5 +24,6 @@
                 <button type="submit" class="btn btn-primary"> Agregar </button>
             </form>
         </div>
+        {/if}
     </div>
 {include 'templates/footer.tpl'} 

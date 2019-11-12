@@ -8,9 +8,12 @@
         public function __construct() {
             $authHelper = new AuthHelper();
             $usuarioAdm = $authHelper->obtenerUsuarioAdm();
+            $adminAdm= $authHelper->obtenerAdminAdm(); // agregado para el administrador
+
             $this->smarty = new Smarty();
             $this->smarty->assign('basehref', BASE_URL);
             $this->smarty->assign('usuarioAdm', $usuarioAdm);
+            $this->smarty->assign('adminAdm', $adminAdm); // este es el que verifica si es admin
         }
 
         public function mostrarLogin($categorias,$webkey, $error = NULL) { // si el parametro no existe, asigno null

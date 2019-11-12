@@ -29,7 +29,7 @@
                   <li class="nav-item active">
                     <a class="nav-link" href="productos">Productos</a> {* te lleva a productos  *}
                   </li>
-                  {if $usuarioAdm}
+                  {if $adminAdm != 0}
                   <li class="nav-item active">
                     <a class="nav-item nav-link" href="categorias"> Administrar Categorias </a>
                   </li>

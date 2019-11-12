@@ -17,8 +17,11 @@
         public function getUsuario($nombre_usuario) { // Get_Usuario
             $sentencia = $this->db->prepare('SELECT * FROM usuarios WHERE nombre_usuario = ?');
             $sentencia->execute(array($nombre_usuario));
-    
-            return $sentencia->fetch(PDO::FETCH_OBJ);
+            // var_dump($sentencia->fetchAll(PDO::FETCH_OBJ));
+            $response = $sentencia->fetch(PDO::FETCH_OBJ);
+            return $response;
+            //var_dump($sentencia->errorInfo()); die();
+            
         }
         
         public function Registrar($nombre_usuario, $password){

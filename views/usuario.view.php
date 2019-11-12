@@ -9,16 +9,18 @@
         public function __construct(){
             $authHelper = new AuthHelper();
             $usuarioAdm = $authHelper->obtenerUsuarioAdm();
+            $adminAdm= $authHelper->obtenerAdminAdm(); // agregado para el administrador
             $this->smarty = new Smarty();
             $this->smarty->assign('basehref', BASE_URL);
             $this->smarty->assign('usuarioAdm', $usuarioAdm);
+            $this->smarty->assign('adminAdm', $adminAdm); // este es el que verifica si es admin
         }
 
         public function mostrarProductos($productos, $categorias){
             $this->smarty->assign('titulo', 'Todos los productos');
             $this->smarty->assign('productos', $productos);
             $this->smarty->assign('categorias', $categorias);
-            $this->smarty->display('templates/MostrarProductos.tpl'); 
+            $this->smarty->display('templates/mostrarProductos.tpl'); 
         }
         
 
@@ -26,13 +28,13 @@
             $this->smarty->assign('titulo', $producto->producto);
             $this->smarty->assign('producto', $producto);
             $this->smarty->assign('categorias', $categorias);
-            $this->smarty->display('templates/MostrarProducto.tpl'); 
+            $this->smarty->display('templates/mostrarProducto.tpl'); 
         }
 
         public function mostrarCategorias($categorias){
             $this->smarty->assign('titulo', 'categorias');
             $this->smarty->assign('categorias', $categorias);
-            $this->smarty->display("templates/MostrarCategorias.tpl");    
+            $this->smarty->display("templates/mostrarCategorias.tpl");    
         }
 
         public function filtradoCategoria($categoria, $categorias, $productoporcategoria){
@@ -41,14 +43,14 @@
             $this->smarty->assign('categorias', $categorias);
             $this->smarty->assign('productoporcategorias', $productoporcategoria);
 
-            $this->smarty->display("templates/MostrarFiltroCategoria.tpl");
+            $this->smarty->display("templates/mostrarFiltroCategoria.tpl");
         }
         
         public function msjError($MsjError, $categorias) {
             $this->smarty->assign('titulo', 'Dificultades tecnicas');
             $this->smarty->assign('categorias', $categorias);
             $this->smarty->assign('MsjError', $MsjError);
-            $this->smarty->display('templates/MostrarError.tpl'); 
+            $this->smarty->display('templates/mostrarError.tpl'); 
         }
         
     }

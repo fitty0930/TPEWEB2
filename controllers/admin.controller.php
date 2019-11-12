@@ -48,7 +48,7 @@
 
 
 
-
+        // deberias llamar a auth helper y chequear a ver si es admin o no
         public function agregarProducto(){
             $this->authHelper->checkLoggedIn();
 

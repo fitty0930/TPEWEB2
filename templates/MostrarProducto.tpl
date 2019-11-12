@@ -13,4 +13,8 @@
                </li>
           </ul>
 </div>
+
+<div class="container">
+     <h2> aca van a ir los comentarios <h2>
+</div>
 {include 'templates/footer.tpl'} 

@@ -35,7 +35,7 @@ include_once('helpers/auth.helper.php');
             // var_dump($skeycaptcha->secret_key);
             $secret = $skeycaptcha->secret_key;
             $webkey= $skeycaptcha->web_key;
-            $usuario = $this->modelUsuario->getUsuario($nombre_usuario);
+            $usuario = $this->modelUsuario->getUsuario($nombre_usuario); // ESTE FALLA 
 
             if(!$captcha){           
                 $this->view->mostrarLogin($categorias, $webkey, "Completa el captcha");
@@ -50,7 +50,7 @@ include_once('helpers/auth.helper.php');
 
                     if (!empty($nombre_usuario) && !empty($password)) {
                         
-                        if (isset($usuario) && password_verify($password, $usuario->password)) {
+                        if ($usuario && password_verify($password, $usuario->password)) { // no es isset porque veo el resultado de $usuario 
                             $this->authHelper->Login($usuario);
                             // var_dump($arr);
                             header('Location: productos');
