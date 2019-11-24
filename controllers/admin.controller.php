@@ -204,7 +204,7 @@
                     $filename = $_FILES["imagenes"]["name"][$key]; //Obtenemos el nombre original del archivo
                     $source = $_FILES["imagenes"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
                     
-                    $directorio = 'img/'; //Declaramos un  variable con la ruta donde guardaremos los archivos
+                    $directorio = 'imagenes/'; //Declaramos un  variable con la ruta donde guardaremos los archivos
                     
                     
                     $dir=opendir($directorio); //Abrimos el directorio de destino
