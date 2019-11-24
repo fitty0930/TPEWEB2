@@ -23,13 +23,21 @@
         {/if}
      {/if}
 <div class="col-12">
-     {foreach from=$imagenes item=imagen}
-          {if $admin}
-               <a href="borrarImg/{$imagen->id_imagen}">Borrar imagen</a> 
-               {* borrarImg *}
-          {/if}
-          <img  class="img-reduc img-fluid" src="{$imagen->ruta}" class="d-block w-100 h-100" alt="img">
-     {/foreach}
+     <div>
+          <ul>
+               {foreach from=$imagenes item=imagen}
+                    <li>
+                    {if $admin}
+                         <a href="borrarImg/{$imagen->id_imagen}">Borrar imagen</a> 
+                         {* borrarImg *}
+                    {/if}
+                    
+                    <img  class="img-reduc img-fluid img-reduct" width="350" src="{$imagen->ruta}" class="d-block w-100 h-100" alt="img">
+                    </li>
+               {/foreach}
+               
+          </ul>
+     <div>
 </div>
 
 <div class="container">
