@@ -1,5 +1,5 @@
 {include 'templates/header.tpl'}  
-<div class="container">
+<div class="container" data-idproducto = "{$producto->id_producto}>
      <h3> {$producto->producto}  </h3>
           <ul class="list-group">    
                <li class="list-group-item">
@@ -14,7 +14,8 @@
           </ul>
 </div>
 
-<input hidden disabled value="{$producto->id_producto}" type="text" class="id_producto">
+<input hidden disabled value="{$producto->id_producto}" type="text" class="idproducto"> 
+{*  *}
      {if $imagenes}
         {if $admin}
         <a href="borrarTodoImg/{$pelicula->id_pelicula}">Borrar Todas</a>

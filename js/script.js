@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(){
             .then(response => response.json())
             .then( () => {
                 getComentarios();
-                console.log("Consulta DELETE exitosa");
+                console.log("Borrado exitoso");
             })
             .catch(error => console.log(error));
             },
@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function(){
                     // cambiar los ()
                     texto: document.querySelector("#texto-comentario").value,
                     puntaje: document.querySelector("#puntaje-comentario").value,
-                    id_producto : document.querySelector(".idpelicula").value,
-                    id_usuario : document.querySelector(".username-id").id
+                    id_producto : document.querySelector(".idproducto").value,
+                    id_usuario : document.querySelector(".nombreusuario-id").id
                 };
                 fetch("api/comentarios",{
                     "method" : "POST",
@@ -47,33 +47,33 @@ document.addEventListener("DOMContentLoaded", function(){
         },
     }
     );
-        //let idpelicula = document.querySelector(".container").data-idpelicula;
+        
         document.addEventListener("load", getComentarios());
         function getComentarios(){
             let idproducto = document.querySelector(".container").dataset.idproducto;
             console.log(idproducto);
             app.loading = true;
-            fetch("api/productos/"+idproducto+"/comentarios")
+            fetch("api/productos/"+idproducto+"/comentarios") // ?
             .then(response => response.json())
             .then(comentarios => {
                 app.comentarios = comentarios;
                 app.promedio = promedioCom(comentarios);
-                console.log("Consulta GET exitosa");
+                console.log("Consulta exitosa");
                 app.loading = false;
             })
             .catch(error => console.log(error));
         };
-        document.querySelector("#btn-refresco").addEventListener('click', getComentarios);
+        document.querySelector("#btn-refrescar").addEventListener('click', getComentarios);
 
         function promedioCom(comentarios){
-            let Puntaje= 0;
+            let puntaje= 0;
             let cont = 0;
             for(let comentario of comentarios){
-                Puntaje += Number(comentario.puntaje);
+                puntaje += Number(comentario.puntaje);
                 cont++;
             }
-            Puntaje = Puntaje/cont;
-            let Promedio = Puntaje.toFixed(2);
+            puntaje = puntaje/cont;
+            let Promedio = puntaje.toFixed(2);
 
             return Promedio;
         }

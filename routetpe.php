@@ -49,11 +49,7 @@ $r->addRoute("darpermisocuenta/:ID","GET","CtrlcuentasController", "darPermisos"
 $r->addRoute("borrarImg/:ID","GET","AdminController", "borrarImagen");
 $r->addRoute("borrarTodoImg/:ID","GET","AdminController", "borrarImagenesIDProducto");
 
-// CAMBIAR
-// $r->addRoute("showRecovery","GET","LoginController", "showRecovery");
-// $r->addRoute("send_recovery","POST","LoginController", "sendRecovery");
-// $r->addRoute("password_recovery","GET","LoginController", "passwordRecovery");
-// $r->addRoute("reset_password","POST","LoginController", "resetPassword");
+
 
 $r->setDefaultRoute("UsuarioController", "mostrarProductos");
 

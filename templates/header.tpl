@@ -60,7 +60,7 @@
                 {if $nombreUsuario} {* tiene problemas *}
                 {* isset($smarty.session.id_usuario) ==  (isset($_SESSION['id_usuario'])) *}
                     <div class="navbar-nav ml-auto">
-                        <span class="navbar-text">{$nombreUsuario}</span>
+                        <span id="{$idUsuario}" class="navbar-text nombreusuario-id">{$nombreUsuario}</span>
                         <a class="nav-item nav-link" href="logout"> Salir </a>
                     </div> 
                     {else}

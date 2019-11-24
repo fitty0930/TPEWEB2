@@ -35,7 +35,7 @@
         }
         public function guardarComentario($texto, $puntaje, $id_producto, $id_usuario){ //save
             // CAMBIAR
-            $sentencia = $this->db->prepare('INSERT INTO comentario(texto, puntaje, id_producto, id_usuario) VALUES(?,?,?,?)');
+            $sentencia = $this->db->prepare('INSERT INTO comentarios(texto, puntaje, id_producto, id_usuario) VALUES(?,?,?,?)');
             $sentencia->execute([$texto, $puntaje, $id_producto, $id_usuario]);
             return $this->db->lastInsertId();
         }
