@@ -18,7 +18,7 @@
 {*  *}
      {if $imagenes}
         {if $admin}
-        <a href="borrarTodoImg/{$pelicula->id_pelicula}">Borrar Todas</a>
+        <a href="borrarTodoImg/{$producto->id_producto}"> Borrar todas las imagenes </a>
         {* borrarTodoImg *}
         {/if}
      {/if}
@@ -28,7 +28,7 @@
                <a href="borrarImg/{$imagen->id_imagen}">Borrar imagen</a> 
                {* borrarImg *}
           {/if}
-          <img  class="img-reduc" src="{$imagen->ruta}" class="d-block w-100 h-100" alt="img">
+          <img  class="img-reduc img-fluid" src="{$imagen->ruta}" class="d-block w-100 h-100" alt="img">
      {/foreach}
 </div>
 

@@ -34,7 +34,7 @@
             // es lo que voy a insertar en la db, se inserta con variables dentro de un array
             
             $sentencia->execute(array($id_categoria, $producto, $marca, $precio));// cantidad de cosas en el array = cant de ?
-            
+            return $this->db->lastInsertId();
         }
         
         

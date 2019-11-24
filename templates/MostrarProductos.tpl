@@ -19,7 +19,7 @@
         <div class="form-group">
             <br>
             <h2> Formulario de mantenimiento </h2>
-            <form action="nuevoproducto" method="POST"> {* nuevo producto  *}
+            <form action="nuevoproducto"  method="POST" enctype="multipart/form-data"> {* nuevo producto  *}
                     <div class="input-group-preprend">
                     <label>Nombre del producto</label>
                     <input class="form-control" type="text" name="producto" placeholder="Playstation"> {* se llama producto*}

@@ -2,7 +2,7 @@
     <div class="container">
       <h3> {$producto->producto} </h3>
 
-        <form action="editarproducto/{$producto->id_producto}" method="POST">
+        <form action="editarproducto/{$producto->id_producto}"  method="POST" enctype="multipart/form-data">
 
                 <label>Nombre del producto</label>
                 <input type="text" name="producto" value="{$producto->producto}">

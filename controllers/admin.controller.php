@@ -63,7 +63,8 @@
             
             // var_dump($id_categoria);
             if ((!empty($producto)) && (!empty($marca)) && (!empty($precio))  && (!empty($id_categoria)) ){
-                $this->modelProducto->agregarProducto($id_categoria, $producto, $marca, $precio); 
+                $id_producto= $this->modelProducto->agregarProducto($id_categoria, $producto, $marca, $precio);
+                var_dump($id_producto);
                 $this->guardarImagen($id_producto);
                 header("Location: productos"); // lo pateo a home
             } else{
@@ -197,21 +198,21 @@
         private function guardarImagen($id_producto){
             foreach($_FILES["imagenes"]['tmp_name'] as $key => $tmp_name){
     
-                //Validamos que el archivo exista
+                // verificar que haya img
                 if($_FILES["imagenes"]["name"][$key]) {
                     if($_FILES['imagenes']['type'][$key] == "image/jpg" || $_FILES['imagenes']['type'][$key] == "image/jpeg" 
                     || $_FILES['imagenes']['type'][$key] == "image/png" ) {
-                    $filename = $_FILES["imagenes"]["name"][$key]; //Obtenemos el nombre original del archivo
-                    $source = $_FILES["imagenes"]["tmp_name"][$key]; //Obtenemos un nombre temporal del archivo
+                    $filename = $_FILES["imagenes"]["name"][$key]; // nombre original img
+                    $source = $_FILES["imagenes"]["tmp_name"][$key]; // nombre temporal img
                     
-                    $directorio = 'imagenes/'; //Declaramos un  variable con la ruta donde guardaremos los archivos
+                    $directorio = 'imagenes/'; // variable con imagenes
                     
                     
-                    $dir=opendir($directorio); //Abrimos el directorio de destino
+                    $dir=opendir($directorio); // mi carpeta de imagenes
                     // MODELIMAGEN
                     $target_path = $this->modelImagen->subirImagen($directorio, $source, $filename);
                     $this->modelImagen->guardarImagen($target_path, $id_producto);
-                    closedir($dir); //Cerramos el directorio de destino
+                    closedir($dir); // cierre de carpeta
                     }
                 }
             }
