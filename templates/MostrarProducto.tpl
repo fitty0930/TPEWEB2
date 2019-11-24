@@ -14,7 +14,26 @@
           </ul>
 </div>
 
+<input hidden disabled value="{$producto->id_producto}" type="text" class="id_producto">
+     {if $imagenes}
+        {if $admin}
+        <a href="borrarTodoImg/{$pelicula->id_pelicula}">Borrar Todas</a>
+        {* borrarTodoImg *}
+        {/if}
+     {/if}
+<div class="col-12">
+     {foreach from=$imagenes item=imagen}
+          {if $admin}
+               <a href="borrarImg/{$imagen->id_imagen}">Borrar imagen</a> 
+               {* borrarImg *}
+          {/if}
+          <img  class="img-reduc" src="{$imagen->ruta}" class="d-block w-100 h-100" alt="img">
+     {/foreach}
+</div>
+
 <div class="container">
-     <h2> aca van a ir los comentarios <h2>
+     <div class="col-md-6">
+          {include 'vue/sectorComentarios.tpl'}
+     </div>
 </div>
 {include 'templates/footer.tpl'} 

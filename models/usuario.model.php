@@ -24,9 +24,9 @@
             
         }
         
-        public function Registrar($nombre_usuario, $password){
-            $sentencia = $this->db->prepare('INSERT INTO usuarios(nombre_usuario, password) VALUE(?,?)');
-            $sentencia->execute([$nombre_usuario, $password]);
+        public function Registrar($nombre_usuario, $password, $admin){ // agregue el admin (siempre 0)
+            $sentencia = $this->db->prepare('INSERT INTO usuarios(nombre_usuario, password, admin) VALUE(?,?,?)');
+            $sentencia->execute([$nombre_usuario, $password, $admin]);
         }
 
         public function captchaSecretKey(){

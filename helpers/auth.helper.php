@@ -8,7 +8,7 @@
 
             $_SESSION['id_usuario'] = $usuario->id_usuario;
             $_SESSION['usuario'] = $usuario->nombre_usuario;
-            $_SESSION['administrador'] = $usuario->admin;
+            $_SESSION['admin'] = $usuario->admin;
 
         }
 
@@ -25,8 +25,11 @@
         }
 
         public function isAdmin(){
-            if($_SESSION['administrador'] != 1){
+            $this->checkLoggedIn();
+            if($_SESSION['admin'] == 0){
                 // darle una respuesta negativa
+                header('Location:'. HOME); // CATEGORIAS
+                die();
             }
         }
 
@@ -37,16 +40,18 @@
                 return NULL;
             }
             
-            return $_SESSION['usuario'];
+            return $_SESSION; // $_SESSION['usuario']
         }
 
-        public function obtenerAdminAdm(){
+        public function obtenerAdminAdm(){ // CAMBIE LA LOGICA DE LA FUNCION
             if(session_status() != PHP_SESSION_ACTIVE)
                 session_start();
-            if(!isset($_SESSION['id_usuario'])){
+            if(!isset($_SESSION['admin'])){ 
+                // aca chequeo por adm 
+                // en lugar de por usuario
                 return NULL;
             }
             
-            return $_SESSION['administrador'];
+            return $_SESSION['admin'];
         }
     }

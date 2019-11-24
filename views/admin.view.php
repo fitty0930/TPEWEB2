@@ -9,14 +9,16 @@
 
         public function __construct(){
             $authHelper = new AuthHelper();
-            $this->smarty= new Smarty();
+            $session= $authHelper->obtenerUsuarioAdm();
+            $nombreUsuario = $session["usuario"]; //userName
+            $idUsuario = $session["id_usuario"];
+            $admin = $authHelper->obtenerAdminAdm();
 
-            $usuarioAdm = $authHelper->obtenerUsuarioAdm();
-            $adminAdm= $authHelper->obtenerAdminAdm(); // agregado para el administrador
-            
+            $this->smarty = new Smarty();
             $this->smarty->assign('basehref', BASE_URL);
-            $this->smarty->assign('usuarioAdm', $usuarioAdm); // este es el del logueo
-            $this->smarty->assign('adminAdm', $adminAdm); // este es el que verifica si es admin
+            $this->smarty->assign('nombreUsuario', $nombreUsuario); // $usuarioAdm
+            $this->smarty->assign('idUsuario', $idUsuario); // PARA MI ESTA DE MAS
+            $this->smarty->assign('admin', $admin); // $adminAdm
         }
         
 

@@ -82,6 +82,7 @@ include_once('helpers/auth.helper.php');
             $categorias = $this->modelCategoria->getCategorias();
             $nombre_usuario = $_POST['usuario'];
             $password = $_POST['password'];
+            $admin=0;
             $captcha = $_POST['g-recaptcha-response'];
             $skeycaptcha = $this->modelUsuario->captchaSecretKey();
             // var_dump($skeycaptcha->secret_key);
@@ -103,7 +104,7 @@ include_once('helpers/auth.helper.php');
         
                             if(!$yaesUsuario){
                                 $hash= password_hash($password, PASSWORD_DEFAULT);
-                                $this->modelUsuario->Registrar($nombre_usuario, $hash);
+                                $this->modelUsuario->Registrar($nombre_usuario, $hash, $admin);
                                 $usuario= $this->modelUsuario->getUsuario($nombre_usuario);// buscar
         
                                 $this->authHelper->Login($usuario);

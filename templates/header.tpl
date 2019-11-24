@@ -8,8 +8,14 @@
         
             <!-- Bootstrap CSS -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            {* vue *}
+            <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+            {* mi js *}
+            <script src="js/script.js"></script>
 
+            {* TITULO DE LA PAGINA *}
             <title>{$titulo}</title>
+
             {* captcha *}
             {* <script src='https://www.google.com/recaptcha/api.js'></script> *}
             <script src="https://www.google.com/recaptcha/api.js?render=_reCAPTCHA_site_key"></script>
@@ -29,11 +35,7 @@
                   <li class="nav-item active">
                     <a class="nav-link" href="productos">Productos</a> {* te lleva a productos  *}
                   </li>
-                  {if $adminAdm != 0}
-                  <li class="nav-item active">
-                    <a class="nav-item nav-link" href="categorias"> Administrar Categorias </a>
-                  </li>
-                  {/if}
+                  
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="categorias" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Categorias</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -43,12 +45,22 @@
                       {/foreach}
                     </div>
                   </li>
+                  {if $admin}
+                    <li class="nav-item active">
+                      <a class="nav-item nav-link" href="categorias"> Administrar Categorias </a>
+                    </li>
+                  
+                    {* el admin *}
+                    <li class="nav-item active ">
+                      <a class="nav-link" href="ctrlcuentas"> Control de cuentas </a>
+                    </li>  
+                  {/if}
                 </ul>
 
-                {if $usuarioAdm} {* tiene problemas *}
+                {if $nombreUsuario} {* tiene problemas *}
                 {* isset($smarty.session.id_usuario) ==  (isset($_SESSION['id_usuario'])) *}
                     <div class="navbar-nav ml-auto">
-                        <span class="navbar-text">{$usuarioAdm}</span>
+                        <span class="navbar-text">{$nombreUsuario}</span>
                         <a class="nav-item nav-link" href="logout"> Salir </a>
                     </div> 
                     {else}

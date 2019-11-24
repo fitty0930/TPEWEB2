@@ -7,12 +7,15 @@
     class UsuarioController{
         private $modelProducto; 
         private $modelCategoria; 
-        private $view;  
+        private $view;
+        private $modelImagen;  
 
         public function __construct(){
             $this->modelProducto = new ProductoModel();
             $this->modelCategoria = new CategoriaModel();
+            $this->modelImagen= new ImagenModel();
             $this->view = new UsuarioView();
+            
         }
 
         public function mostrarProductos(){
@@ -22,13 +25,15 @@
         }
 
         
-        public function mostrarProducto($id_producto){ 
+        public function mostrarProducto($params = NULL){ 
+            $id_producto = $params[':ID'];
             $producto = $this->modelProducto->getProductosID($id_producto); 
             // var_dump($id_producto);
             // var_dump($producto);
+            $imagenes = $this->modelImagen->getImgProducto($id_producto);
             $categorias = $this->modelCategoria->getCategorias();
             if($producto){
-                $this->view->mostrarProducto($producto, $categorias);}
+                $this->view->mostrarProducto($producto, $categorias, $imagenes);} // AGREGA IMAGENES
             else{
                 $this->view->msjError("No se encontró su producto", $categorias); 
             }
@@ -40,7 +45,8 @@
             // var_dump($categorias);
         }
 
-        public function mostrarCategoria($id_categoria){ 
+        public function mostrarCategoria($params = NULL){ 
+            $id_categoria = $params[':ID'];
             $categoria= $this->modelCategoria->Get($id_categoria);
             $categorias= $this->modelCategoria->getCategorias();
             // aca

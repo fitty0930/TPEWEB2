@@ -5,7 +5,7 @@
             {foreach $categorias as $categoria} 
                 <li class="list-group-item">
                 <a href="categorias/{$categoria->id_categoria}">{$categoria->nombre}</a>
-                {if $adminAdm != 0}
+                {if $admin}
                     --------
                     <a href="edicioncategoria/{$categoria->id_categoria}">Editar</a>|  
                     <a href="borrarcategoria/{$categoria->id_categoria}">Eliminar</a> 
@@ -14,7 +14,7 @@
             {/foreach}
         </ul>
 
-        {if $adminAdm != 0}
+        {if $admin}
         <h2> Formulario de mantenimiento </h2>
         <div class="form-group">
             <form action="nuevacategoria" method="POST">

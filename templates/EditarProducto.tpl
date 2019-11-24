@@ -23,7 +23,16 @@
                 {/if}
                 {/foreach}
                 </select>
+                <div>
+                {* imagenes *}
+                <label>Imagenes: </label>
+                <br>
+                <input type="file" name="imagenes[]" accept=".jpg, .png, .jpeg" multiple="">
+                
+                </div>
+            <br>
             <button type="submit" class="btn btn-primary" name="editar" value="{$producto->id_producto}"> Editar </button>
+            
         </form>
     </div>
  

@@ -1,7 +1,7 @@
 {include file="header.tpl"}
     <div class="container">
-        {if $usuarioAdm}
-        <h3> Lo sentimos {$usuarioAdm}</h3>
+        {if $nombreUsuario}
+        <h3> Lo sentimos {$nombreUsuario}</h3>
         {else}
         <h3> Lo sentimos </h3>
         {/if}

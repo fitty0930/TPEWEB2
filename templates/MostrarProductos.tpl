@@ -6,14 +6,14 @@
             {* imprimo con un foreach a cada cosa del objeto productos lo subdivido e imprimo *}
             {foreach $productos as $producto}
                 <li class="list-group-item">{$producto->nombre}  ----  {$producto->producto} ---- {$producto->marca} --- Precio:${$producto->precio} 
-                {if $adminAdm != 0 } 
+                {if $admin} 
                 <a href="borrarproducto/{$producto->id_producto}"> Borrar </a>|<a href="edicionproducto/{$producto->id_producto}"> Modificar </a>
                 {/if}
                 </li>      
             {/foreach}
         </ul>
     </div>
-    {if $adminAdm != 0 } 
+    {if $admin} 
      {* tendria que agregar un variable para definir si es administrador o cambiar esta  *}
     <div class="container">
         <div class="form-group">
@@ -31,6 +31,10 @@
                     <input class="form-control" type="number" name="precio" placeholder="1000"> {* se llama precio*}
                     </div>
                     
+                    <label>Imagenes</label>
+                    <br>
+                    <input type="file" name="imagenes[]" accept=".jpg, .png, .jpeg" multiple=""> {* para las imagenes *}
+                    <br>
                     <label> Categoria </label>
                     <div class="input-group">
                     <select class="custom-select" name="categoria" id="categoria"> {* se llama nombre dentro de categorias y id-cat dentro de productos*}
