@@ -33,7 +33,7 @@
             $sentencia = $this->db->prepare('DELETE FROM comentarios WHERE id_comentario = ?');
             $sentencia->execute([$id_comentario]);
         }
-        public function guardarComentario($texto, $puntaje, $id_producto, $id_usuario){ //save
+        public function guardarComentario($texto, $puntaje, $id_producto, $id_usuario){ 
             // CAMBIAR
             $sentencia = $this->db->prepare('INSERT INTO comentarios(texto, puntaje, id_producto, id_usuario) VALUES(?,?,?,?)');
             $sentencia->execute([$texto, $puntaje, $id_producto, $id_usuario]);

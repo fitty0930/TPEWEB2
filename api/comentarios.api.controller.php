@@ -11,15 +11,15 @@ class ApiController{
      
     
     private $modelComentario;
-    private $modelProducto; // modelp
-    private $modelCategoria; // modelg
-    private $viewJSON; // viewjson
-    private $data; // para el input
+    private $modelProducto; 
+    private $modelCategoria; 
+    private $viewJSON; 
+    private $data; 
     private $authHelper;
 
     public function __construct(){
         $this->modelComentario = new ComentarioModel();
-        $this->$modelProducto = new ProductoModel();
+        $this->modelProducto = new ProductoModel();
         $this->viewJSON = new JSONView();
         $this->modelCategoria = new CategoriaModel();
         $this->authHelper = new AuthHelper();
@@ -40,7 +40,7 @@ class ApiController{
         }else{
             $this->viewJSON->response('No existe el id del producto', 404);
         }
-    } // crear comentario model 
+    } 
 
     public function agregarComentario(){
         
@@ -54,7 +54,7 @@ class ApiController{
     }
 
     public function borrarComentario($params = NULL){
-        
+        // $this->authHelper->isAdmin();
         $id_comentario = $params[':ID'];
         $comentario = $this->modelComentario->Get($id_comentario);
         if($comentario){

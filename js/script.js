@@ -1,7 +1,7 @@
 "use strict"
 document.addEventListener("DOMContentLoaded", function(){
     let app = new Vue({
-        el: "#comentarios_api",
+        el: "#comentarios-api",
         data: {
             title: "Lista de comentarios",
             loading: false,
@@ -12,10 +12,12 @@ document.addEventListener("DOMContentLoaded", function(){
          
         methods: {
             borrarComentario: function (event, id_comentario){
-            fetch("api/comentarios/"+id_comentario,{
+            let urlencoded = encodeURI("api/comentarios/"+id_comentario)
+            fetch(urlencoded,{
                 "method" : "DELETE"
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) { console.log("error"); } else { return response.json()}})
             .then( () => {
                 getComentarios();
                 console.log("Borrado exitoso");
@@ -24,22 +26,29 @@ document.addEventListener("DOMContentLoaded", function(){
             },
 
             agregarComentario: function (){
+                let texto= document.querySelector("#texto-comentario").value;
+                let puntaje= document.querySelector("#puntaje-comentario").value;
+                let id_producto = document.querySelector(".id_producto").value;
+                let id_usuario = document.querySelector(".nombreusuario-id").id;
+
                 let data = {
-                    // cambiar los ()
-                    texto: document.querySelector("#texto-comentario").value,
-                    puntaje: document.querySelector("#puntaje-comentario").value,
-                    id_producto : document.querySelector(".idproducto").value,
-                    id_usuario : document.querySelector(".nombreusuario-id").id
+                    "texto": texto,
+                    "puntaje": puntaje,
+                    "id_producto" : id_producto,
+                    "id_usuario" : id_usuario
                 };
+
                 fetch("api/comentarios",{
                     "method" : "POST",
-                    headers: {'Content-Type': 'application/json'},       
-                    body: JSON.stringify(data)
+                    "mode": 'cors',
+                    "headers": {'Content-Type': 'application/json'},       
+                    "body": JSON.stringify(data)
+                }).then(response => {
+                    if (!response.ok) { console.log("error"); } else { return response.json()}
                 })
-                .then(response => response.json())
                 .then(() =>{
                     getComentarios();
-                    console.log("Consulta POST exitosa")
+                    console.log("publicado con exito")
                 })
                 .catch(error => console.log(error));
             }
@@ -50,10 +59,11 @@ document.addEventListener("DOMContentLoaded", function(){
         
         document.addEventListener("load", getComentarios());
         function getComentarios(){
-            let idproducto = document.querySelector(".container").dataset.idproducto;
+            let idproducto = document.querySelector(".container").dataset.id_producto;
             console.log(idproducto);
             app.loading = true;
-            fetch("api/productos/"+idproducto+"/comentarios") // ?
+            let urlencoded = encodeURI("api/productos/"+idproducto+"/comentarios")
+            fetch(urlencoded)
             .then(response => response.json())
             .then(comentarios => {
                 app.comentarios = comentarios;
@@ -73,8 +83,8 @@ document.addEventListener("DOMContentLoaded", function(){
                 cont++;
             }
             puntaje = puntaje/cont;
-            let Promedio = puntaje.toFixed(2);
+            let promedio = puntaje.toFixed(2);
 
-            return Promedio;
+            return promedio;
         }
 });

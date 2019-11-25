@@ -1,8 +1,8 @@
 {literal}
-<section id="comentarios_api">
-    <div class="card col-md-6">
+<section id="comentarios-api">
+    <div class="card col-md-12">
     <div  v-if= "comentarios[0]" class="col-md-12">
-        Este es el promedio
+        Puntuacion promedio del producto
         {{promedio}}
     </div>
             <div class="card-header d-flex justify-content-between align-items-center">
@@ -19,16 +19,15 @@
                 <a v-for="comentario in comentarios" class="list-group-item list-group-item-action"> 
                 
                     {{ comentario.texto }} 
-                    {* marca *}
                         <div class="card-footer text-muted">
-                    <li>Usuario: {{ comentario.nombre_usuario }}</li> 
-                    <li>Puntaje: {{comentario.puntaje}}</li>
+                            <li>Usuario: {{ comentario.nombre_usuario }}</li> 
+                            <li>Puntaje: {{comentario.puntaje}}</li>
                         </div>
                 {/literal}
                 {if $admin}
                     {literal}
                     <button  @click="(event)=>{borrarComentario(event, comentario.id_comentario)}" class="delete"> Borrar </button>
-                    {* deleteComent *}
+
                     {/literal}
                     {/if}
                     {literal}

@@ -50,7 +50,7 @@ $r->addRoute("borrarImg/:ID","GET","AdminController", "borrarImagen");
 $r->addRoute("borrarTodoImg/:ID","GET","AdminController", "borrarImagenesIDProducto");
 
 
-
+// DEFAULT
 $r->setDefaultRoute("UsuarioController", "mostrarProductos");
 
 $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
