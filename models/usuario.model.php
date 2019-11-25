@@ -24,7 +24,7 @@
             
         }
         
-        public function Registrar($nombre_usuario, $password, $admin){ // agregue el admin (siempre 0)
+        public function Registrar($nombre_usuario, $password, $admin){ 
             $sentencia = $this->db->prepare('INSERT INTO usuarios(nombre_usuario, password, admin) VALUE(?,?,?)');
             $sentencia->execute([$nombre_usuario, $password, $admin]);
         }

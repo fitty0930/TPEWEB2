@@ -38,7 +38,9 @@ document.addEventListener("DOMContentLoaded", function(){
                     "id_usuario" : id_usuario
                 };
 
-                fetch("api/comentarios",{
+                let urlencoded = encodeURI("api/comentarios")
+
+                fetch(urlencoded,{
                     "method" : "POST",
                     "mode": 'cors',
                     "headers": {'Content-Type': 'application/json'},       
@@ -48,6 +50,8 @@ document.addEventListener("DOMContentLoaded", function(){
                 })
                 .then(() =>{
                     getComentarios();
+                    document.querySelector("#texto-comentario").value = "";
+                    document.querySelector("#puntaje-comentario").value = 5;
                     console.log("publicado con exito")
                 })
                 .catch(error => console.log(error));
@@ -58,17 +62,18 @@ document.addEventListener("DOMContentLoaded", function(){
     );
         
         document.addEventListener("load", getComentarios());
+        document.querySelector("#btn-refrescar").addEventListener('click', getComentarios);
+
         function getComentarios(){
-            let idproducto = document.querySelector(".container").dataset.id_producto;
-            console.log(idproducto);
+            let id_producto = document.querySelector(".container").dataset.id_producto;
+            console.log(id_producto);
             app.loading = true;
-            let urlencoded = encodeURI("api/productos/"+idproducto+"/comentarios")
+            let urlencoded = encodeURI("api/productos/"+id_producto+"/comentarios")
             fetch(urlencoded)
             .then(response => response.json())
             .then(comentarios => {
                 app.comentarios = comentarios;
                 app.promedio = promedioCom(comentarios);
-                console.log("Consulta exitosa");
                 app.loading = false;
             })
             .catch(error => console.log(error));
@@ -78,13 +83,15 @@ document.addEventListener("DOMContentLoaded", function(){
         function promedioCom(comentarios){
             let puntaje= 0;
             let cont = 0;
+            console.log("esta es funcion promedio");
+            console.log(comentarios);
             for(let comentario of comentarios){
                 puntaje += Number(comentario.puntaje);
                 cont++;
             }
             puntaje = puntaje/cont;
-            let promedio = puntaje.toFixed(2);
-
+            let promedio = puntaje.toFixed(1);
+            
             return promedio;
         }
 });

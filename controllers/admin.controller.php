@@ -24,14 +24,14 @@
             $this->modelImagen= new ImagenModel();
         }
         
-
+        // PRODUCTOS
         public function mostrarProductos(){
             $productos = $this->modelProducto->getProductos();
             $categorias= $this->modelCategoria->getCategorias();
             $this->viewUser->mostrarProductos($productos, $categorias);
         }
 
-        public function mostrarProducto($id_producto){ // mostrarproducto_
+        public function mostrarProducto($id_producto){ 
             // var_dump($id_producto);
             $producto = $this->modelProducto->getProductosID($id_producto);  
             $categorias = $this->modelCategoria->getCategorias();
@@ -42,15 +42,6 @@
             }
         }
 
-
-        public function mostrarCategorias(){
-            $categorias= $this->modelCategoria->getCategorias();
-            $this->viewUser->mostrarCategorias($categorias);
-        }
-
-
-
-        // deberias llamar a auth helper y chequear a ver si es admin o no
         public function agregarProducto(){
             $this->authHelper->isAdmin();
 
@@ -81,28 +72,7 @@
             header("Location: ../productos"); // tene en cuenta esto
         }
 
-        private function borrarImagenLocal($id_producto){
-            $imagenes = $this->modelImagen->getImgProducto($id_producto);
-            foreach ($imagenes as $imagen) {
-                unlink($imagen->ruta);
-            }
-        }
-        // FIJARSE LOS HEADERS
-        public function borrarImagen($params = NULL){
-            $id_imagen = $params[':ID'];
-            $this->authHelper->isAdmin();
-            $imagen = $this->modelImagen->getImagen($id_imagen);
-            unlink($imagen->ruta);
-            $this->modelImagen->borrarIDImagen($id_imagen);
-            header("Location: ../productos/".$imagen->id_producto);
-        }
-        public function borrarImagenesIDProducto($params = NULL){
-            $id_producto= $params[':ID'];
-            $this->authHelper->isAdmin();
-            $this->borrarImagenLocal($id_producto);
-            $this->modelImagen->borrarIDProducto($id_producto);
-            header("Location: ../productos/".$id_producto);
-        }
+        
 
 
         public function editarUnProducto($params = NULL){ // edita 1 producto por su id 
@@ -137,8 +107,13 @@
             $this->viewUser->msjError("Datos insuficientes",$categorias);
         }
 
+        // CATEGORIAS
+        public function mostrarCategorias(){
+            $categorias= $this->modelCategoria->getCategorias();
+            $this->viewUser->mostrarCategorias($categorias);
+        }
+
         
-        // comienza categorias 
         public function agregarCategoria(){ 
             $this->authHelper->isAdmin();
             $nombre= $_POST['nombre']; 
@@ -195,6 +170,8 @@
             }
         }
 
+
+        // IMAGENES
         private function guardarImagen($id_producto){
             foreach($_FILES["imagenes"]['tmp_name'] as $key => $tmp_name){
     
@@ -216,6 +193,29 @@
                     }
                 }
             }
+        }
+
+        private function borrarImagenLocal($id_producto){
+            $imagenes = $this->modelImagen->getImgProducto($id_producto);
+            foreach ($imagenes as $imagen) {
+                unlink($imagen->ruta);
+            }
+        }
+        
+        public function borrarImagen($params = NULL){
+            $id_imagen = $params[':ID'];
+            $this->authHelper->isAdmin();
+            $imagen = $this->modelImagen->getImagen($id_imagen);
+            unlink($imagen->ruta);
+            $this->modelImagen->borrarIDImagen($id_imagen);
+            header("Location: ../productos/".$imagen->id_producto);
+        }
+        public function borrarImagenesIDProducto($params = NULL){
+            $id_producto= $params[':ID'];
+            $this->authHelper->isAdmin();
+            $this->borrarImagenLocal($id_producto);
+            $this->modelImagen->borrarIDProducto($id_producto);
+            header("Location: ../productos/".$id_producto);
         }
 
         

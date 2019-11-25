@@ -18,6 +18,7 @@
             $this->authHelper->isAdmin(); // MIRARLO
         }
 
+        // CONTROL DE CUENTAS
         public function mostrarCuentas(){ 
             $usuarios= $this->modelCtrlcuentas->getUsuarios();
             $categorias= $this->modelCategoria->getCategorias();

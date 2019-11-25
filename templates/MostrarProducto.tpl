@@ -13,35 +13,37 @@
                </li>
           </ul>
 </div>
-
-<input hidden disabled value="{$producto->id_producto}" type="text" class="id_producto"> 
-{*  *}
+<div class="container">
+     <div class="col-md-12">
+     <input hidden disabled value="{$producto->id_producto}" type="text" class="id_producto"> 
+          {*  *}
      {if $imagenes}
         {if $admin}
-        <a href="borrarTodoImg/{$producto->id_producto}"> Borrar todas las imagenes </a>
-        {* borrarTodoImg *}
+        <br>
+        <a href="borrarTodoImg/{$producto->id_producto}" class="badge badge-danger text-wrap" style="width: 6rem;"> Borrar todas las imagenes </a>
+        
         {/if}
      {/if}
-<div class="col-12">
-     <div>
-          <ul>
+          <div class="col-md-6">
+          <ul class="list-group">
                {foreach from=$imagenes item=imagen}
-                    <li>
+                    <li class="list-group-item">
                     {if $admin}
-                         <a href="borrarImg/{$imagen->id_imagen}">Borrar imagen</a> 
-                         {* borrarImg *}
+                         <a href="borrarImg/{$imagen->id_imagen}"class="badge badge-danger text-wrap" style="width: 6rem;" >Borrar imagen</a> <br> 
+                         
                     {/if}
                     
-                    <img  class="img-reduc img-fluid img-reduct" width="350" src="{$imagen->ruta}" class="d-block w-100 h-100" alt="img">
+                    <img  class="img-reduc img-fluid img-reduct img-thumbnail" src="{$imagen->ruta}" class="d-block w-100 h-100" alt="img">
                     </li>
                {/foreach}
                
           </ul>
+          </div>
      <div>
 </div>
 
 <div class="container">
-     <div class="col-md-6">
+     <div class="col-md-12">
           {include 'vue/sectorComentarios.tpl'}
      </div>
 </div>

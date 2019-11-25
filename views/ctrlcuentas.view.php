@@ -10,22 +10,23 @@ require_once('helpers/auth.helper.php');
         public function __construct(){
                 $authHelper = new AuthHelper();
                 $session= $authHelper->obtenerUsuarioAdm();
-                $nombreUsuario = $session["usuario"]; //userName
+                $nombreUsuario = $session["usuario"]; 
                 $idUsuario = $session["id_usuario"];
                 $admin = $authHelper->obtenerAdminAdm();
-
+                $administraAlgo = 0;
                 $this->smarty = new Smarty();
                 $this->smarty->assign('basehref', BASE_URL);
                 $this->smarty->assign('nombreUsuario', $nombreUsuario);
-                $this->smarty->assign('idUsuario', $idUsuario); // PARA MI ESTA DE MAS
-                $this->smarty->assign('admin', $admin); // PARA MI ESTA DE MAS
+                $this->smarty->assign('idUsuario', $idUsuario); 
+                $this->smarty->assign('admin', $admin); 
+                $this->smarty->assign('administraAlgo',$administraAlgo);
         }
 
-        public function mostrarUsuarios($usuarios, $categorias){ // mostrar usuario
+        public function mostrarUsuarios($usuarios, $categorias){ 
             $this->smarty->assign('titulo', 'Usuarios');
             $this->smarty->assign('usuarios', $usuarios);
             $this->smarty->assign('categorias', $categorias);
-            $this->smarty->display('templates/mostrarCuentas.tpl'); // showUsers
+            $this->smarty->display('templates/mostrarCuentas.tpl'); 
         }
 
         

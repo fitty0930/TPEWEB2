@@ -6,10 +6,10 @@
             mismo  *}
             <li>
             Nombre: {$usuario->nombre_usuario}
-            Es admin?: {if $usuario->admin==0}
-                        No
+            Condicion: {if $usuario->admin== $administraAlgo}
+                        <span class="badge badge-success text-wrap" style="width: 6rem;"> Usuario </span>
                         {else}
-                        Si
+                        <span class="badge badge-danger text-wrap" style="width: 6rem;"> Administrador </span>
                     {/if}
             {* cambiar por button *}
             <small><a href="borrarcuenta/{$usuario->id_usuario}"> Eliminar </a></small>

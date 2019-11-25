@@ -17,6 +17,8 @@ include_once('helpers/auth.helper.php');
             $this->authHelper = new AuthHelper();
 
         }
+
+        // INGRESO
         public function mostrarLogin(){
             $categorias= $this->modelCategoria->getCategorias();
             $wkeycaptcha = $this->modelUsuario->captchaSecretKey();
@@ -65,11 +67,13 @@ include_once('helpers/auth.helper.php');
             }
         }
         
+        // SALIDA
         public function Logout() {
             $this->authHelper->Logout();
             header('Location: home');
         }
 
+        // REGISTRO
         public function mostrarRegistro(){
             $categorias = $this->modelCategoria->getCategorias();
             // model usuario

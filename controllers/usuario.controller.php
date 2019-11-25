@@ -18,6 +18,7 @@
             
         }
 
+        // PRODUCTOS
         public function mostrarProductos(){
             $productos = $this->modelProducto->getProductos();
             $categorias= $this->modelCategoria->getCategorias();
@@ -39,6 +40,7 @@
             }
         }
         
+        // CATEGORIAS
         public function mostrarCategorias(){
             $categorias= $this->modelCategoria->getCategorias();
             $this->view->mostrarCategorias($categorias);

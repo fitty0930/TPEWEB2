@@ -28,7 +28,7 @@
             $this->checkLoggedIn();
             if($_SESSION['admin'] == 0){
                 // darle una respuesta negativa
-                header('Location:'. HOME); // CATEGORIAS
+                header('Location:'. HOME);
                 die();
             }
         }
@@ -43,12 +43,10 @@
             return $_SESSION; // $_SESSION['usuario']
         }
 
-        public function obtenerAdminAdm(){ // CAMBIE LA LOGICA DE LA FUNCION
+        public function obtenerAdminAdm(){ 
             if(session_status() != PHP_SESSION_ACTIVE)
                 session_start();
             if(!isset($_SESSION['admin'])){ 
-                // aca chequeo por adm 
-                // en lugar de por usuario
                 return NULL;
             }
             
