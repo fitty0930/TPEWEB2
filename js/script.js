@@ -63,10 +63,12 @@ document.addEventListener("DOMContentLoaded", function(){
         
         document.addEventListener("load", getComentarios());
         document.querySelector("#btn-refrescar").addEventListener('click', getComentarios);
+        document.querySelector("#btn-ordenar-desc").addEventListener('click', getComentariosPtsOrdDesc);//mejores
+        document.querySelector("#btn-ordenar-asc").addEventListener('click', getComentariosPtsOrdAsc);//peores
 
         function getComentarios(){
             let id_producto = document.querySelector(".container").dataset.id_producto;
-            console.log(id_producto);
+            // console.log(id_producto);
             app.loading = true;
             let urlencoded = encodeURI("api/productos/"+id_producto+"/comentarios")
             fetch(urlencoded)
@@ -78,7 +80,36 @@ document.addEventListener("DOMContentLoaded", function(){
             })
             .catch(error => console.log(error));
         };
-        document.querySelector("#btn-refrescar").addEventListener('click', getComentarios);
+        
+        function getComentariosPtsOrdDesc(){
+            let id_producto = document.querySelector(".container").dataset.id_producto;
+            // console.log(id_producto);
+            app.loading = true;
+            let urlencoded = encodeURI("api/productos/"+id_producto+"/comentariosdesc")
+            fetch(urlencoded)
+            .then(response => response.json())
+            .then(comentarios => {
+                app.comentarios = comentarios;
+                app.promedio = promedioCom(comentarios);
+                app.loading = false;
+            })
+            .catch(error => console.log(error));
+        };
+
+        function getComentariosPtsOrdAsc(){
+            let id_producto = document.querySelector(".container").dataset.id_producto;
+            // console.log(id_producto);
+            app.loading = true;
+            let urlencoded = encodeURI("api/productos/"+id_producto+"/comentariosasc")
+            fetch(urlencoded)
+            .then(response => response.json())
+            .then(comentarios => {
+                app.comentarios = comentarios;
+                app.promedio = promedioCom(comentarios);
+                app.loading = false;
+            })
+            .catch(error => console.log(error));
+        };
 
         function promedioCom(comentarios){
             let puntaje= 0;

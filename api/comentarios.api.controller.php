@@ -64,4 +64,30 @@ class ApiController{
             $this->viewJSON->response("El comentario con el id: $id_comentario no existe", 404);
         }
     }
+
+    public function obtenerComentariosDelProductoPtsMejores($params = NULL){
+        
+        $id_producto = $params[':ID'];
+        $productoComentarios = $this->modelProducto->Get($id_producto);
+        if($productoComentarios){
+            $this->modelCategoria->getCategorias();
+            $comentarios = $this->modelComentario->obtenerComentariosDelProductoPtsMejores($id_producto);
+            $this->viewJSON->response($comentarios, 200);
+        }else{
+            $this->viewJSON->response('No existe el id del producto', 404);
+        }
+    }
+
+    public function obtenerComentariosDelProductoPtsPeores($params = NULL){
+        
+        $id_producto = $params[':ID'];
+        $productoComentarios = $this->modelProducto->Get($id_producto);
+        if($productoComentarios){
+            $this->modelCategoria->getCategorias();
+            $comentarios = $this->modelComentario->obtenerComentariosDelProductoPtsPeores($id_producto);
+            $this->viewJSON->response($comentarios, 200);
+        }else{
+            $this->viewJSON->response('No existe el id del producto', 404);
+        }
+    }
 }

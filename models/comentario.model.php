@@ -27,6 +27,20 @@
 
             return $sentencia->fetchAll(PDO::FETCH_OBJ);
         }
+
+        public function obtenerComentariosDelProductoPtsMejores($id_producto){
+            $sentencia = $this->db->prepare('SELECT comentarios.id_comentario, comentarios.texto, comentarios.puntaje, usuarios.nombre_usuario AS nombre_usuario FROM comentarios JOIN usuarios ON comentarios.id_usuario=usuarios.id_usuario WHERE comentarios.id_producto = ? ORDER BY comentarios.puntaje DESC');
+            $sentencia->execute([$id_producto]);
+
+            return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        }
+
+        public function obtenerComentariosDelProductoPtsPeores($id_producto){
+            $sentencia = $this->db->prepare('SELECT comentarios.id_comentario, comentarios.texto, comentarios.puntaje, usuarios.nombre_usuario AS nombre_usuario FROM comentarios JOIN usuarios ON comentarios.id_usuario=usuarios.id_usuario WHERE comentarios.id_producto = ? ORDER BY comentarios.puntaje ASC');
+            $sentencia->execute([$id_producto]);
+
+            return $sentencia->fetchAll(PDO::FETCH_OBJ);
+        }
         
         public function borrarComentario($id_comentario){
             $sentencia = $this->db->prepare('DELETE FROM comentarios WHERE id_comentario = ?');
