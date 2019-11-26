@@ -61,7 +61,17 @@
                 {if $nombreUsuario} {* tiene problemas *}
                 {* isset($smarty.session.id_usuario) ==  (isset($_SESSION['id_usuario'])) *}
                     <div class="navbar-nav ml-auto">
+                        {if $admin}
+                        <a class="navbar-brand" >
+                          <img src="https://img2.freepng.es/20180402/rqq/kisspng-computer-icons-logo-symbol-clip-art-administrator-5ac2ab29825f65.316448641522707241534.jpg" width="30" height="30" alt="">
+                        </a>
+                        {else}
+                        <a class="navbar-brand" >
+                          <img src="https://definicion.de/wp-content/uploads/2019/06/perfildeusuario.jpg" width="30" height="30" alt="">
+                        </a>
+                        {/if}
                         <span id="{$idUsuario}" class="navbar-text nombreusuario-id">{$nombreUsuario}</span>
+                        
                         <a class="nav-item nav-link" href="logout"> Salir </a>
                     </div> 
                     {else}

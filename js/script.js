@@ -6,8 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
             title: "Lista de comentarios",
             loading: false,
             comentarios: [],
-            promedio: 0,
-            admin: false
+            promedio: 0
         },
          
         methods: {
@@ -72,7 +71,8 @@ document.addEventListener("DOMContentLoaded", function(){
             app.loading = true;
             let urlencoded = encodeURI("api/productos/"+id_producto+"/comentarios")
             fetch(urlencoded)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) { console.log("error"); } else { return response.json()}})
             .then(comentarios => {
                 app.comentarios = comentarios;
                 app.promedio = promedioCom(comentarios);
@@ -87,7 +87,8 @@ document.addEventListener("DOMContentLoaded", function(){
             app.loading = true;
             let urlencoded = encodeURI("api/productos/"+id_producto+"/comentariosdesc")
             fetch(urlencoded)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) { console.log("error"); } else { return response.json()}})
             .then(comentarios => {
                 app.comentarios = comentarios;
                 app.promedio = promedioCom(comentarios);
@@ -102,7 +103,8 @@ document.addEventListener("DOMContentLoaded", function(){
             app.loading = true;
             let urlencoded = encodeURI("api/productos/"+id_producto+"/comentariosasc")
             fetch(urlencoded)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) { console.log("error"); } else { return response.json()}})
             .then(comentarios => {
                 app.comentarios = comentarios;
                 app.promedio = promedioCom(comentarios);
@@ -125,4 +127,6 @@ document.addEventListener("DOMContentLoaded", function(){
             
             return promedio;
         }
+
+        setInterval(function(){ getComentarios();} , 60000);
 });
