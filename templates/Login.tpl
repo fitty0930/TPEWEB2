@@ -20,11 +20,6 @@
 
         <div class="g-recaptcha" data-sitekey="{$webkey}"></div>
         
-        {if $error && $error != "Completa el captcha"}
-        <br>
-        <p> ¿Olvidó su contraseña? Puede enviar un mensaje a nolarecuperarajamas@gmail.com  </p>
-        {/if}
-
         <button type="submit" class="btn btn-primary">Ingresar</button>
     </form>
 

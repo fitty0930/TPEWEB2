@@ -30,7 +30,7 @@
             $categorias= $this->modelCategoria->getCategorias();
             $usuario= $this->modelCtrlcuentas->getUsuarioID($id_usuario);
             if($usuario->admin!=0){
-                $this->viewCtrlcuentas->msjError('ERROR: Imposible borrar a un admin', $categorias);
+                $this->viewCtrlcuentas->msjError('Quite los permisos antes de eliminar a un administrador', $categorias);
                 die();
             }
             $this->modelCtrlcuentas->borrarUsuario($id_usuario);

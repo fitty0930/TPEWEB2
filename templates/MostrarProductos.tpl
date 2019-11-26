@@ -5,9 +5,9 @@
         <ul class="list-group">
             {* imprimo con un foreach a cada cosa del objeto productos lo subdivido e imprimo *}
             {foreach $productos as $producto}
-                <li class="list-group-item">{$producto->nombre}  ----  {$producto->producto} ---- {$producto->marca} --- Precio:${$producto->precio} 
+                <li class="list-group-item">{$producto->nombre} ---- <a href="productos/{$producto->id_producto}">{$producto->producto}</a>    ---- {$producto->marca} --- Precio:${$producto->precio} 
                 {if $admin} 
-                <a href="borrarproducto/{$producto->id_producto}"> Borrar </a>|<a href="edicionproducto/{$producto->id_producto}"> Modificar </a>
+                <a href="borrarproducto/{$producto->id_producto}" class="badge badge-danger text-wrap" style="width: 6rem;"> Borrar </a> <a class="badge badge-warning text-wrap" style="width: 6rem;" href="edicionproducto/{$producto->id_producto}"> Modificar </a>
                 {/if}
                 </li>      
             {/foreach}

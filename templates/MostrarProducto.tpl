@@ -1,6 +1,6 @@
 {include 'templates/header.tpl'}  
 <div class="container" data-id_producto = "{$producto->id_producto}">
-     <h3> {$producto->producto}  </h3>
+     <h3> <a href="edicionproducto/{$producto->id_producto}"> {$producto->producto} </a> </h3>
           <ul class="list-group">    
                <li class="list-group-item">
                     Marca: {$producto->marca}

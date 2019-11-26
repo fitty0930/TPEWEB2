@@ -61,7 +61,6 @@ document.addEventListener("DOMContentLoaded", function(){
     );
         
         document.addEventListener("load", getComentarios());
-        document.querySelector("#btn-refrescar").addEventListener('click', getComentarios);
         document.querySelector("#btn-ordenar-desc").addEventListener('click', getComentariosPtsOrdDesc);//mejores
         document.querySelector("#btn-ordenar-asc").addEventListener('click', getComentariosPtsOrdAsc);//peores
 

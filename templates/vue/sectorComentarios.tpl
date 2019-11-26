@@ -7,7 +7,6 @@
     </div>
             <div class="card-header d-flex justify-content-between">
                 <h4 class="mb-0">Comentarios</h4>
-                <button id="btn-refrescar" type="button" class="btn btn-primary btn-sm">Refrescar</button>
                 <button id="btn-ordenar-desc" type="button" class="btn btn-warning btn-sm"> Los mejores primero </button>
                 <button id="btn-ordenar-asc" type="button" class="btn btn-danger btn-sm"> Los peores primero </button>
             </div>

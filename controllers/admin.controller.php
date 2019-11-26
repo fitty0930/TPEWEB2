@@ -102,7 +102,7 @@
             if ((!empty($producto)) && (!empty($marca)) && (!empty($precio))  && (!empty($id_categoria))){
                 $this->guardarImagen($id_producto); // guardarImagen
                 $this->modelProducto->editarProducto($id_producto, $id_categoria, $producto, $marca, $precio);
-               header("Location: ../productos");
+               header("Location: ../productos/$id_producto");
             } else
             $this->viewUser->msjError("Datos insuficientes",$categorias);
         }

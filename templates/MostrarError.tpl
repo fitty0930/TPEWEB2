@@ -5,7 +5,8 @@
         {else}
         <h3> Lo sentimos </h3>
         {/if}
-        <p> Tuvimos un problema para completar su solicitud</p>
-        <h3>{$MsjError}</h3>
+        <h5> Tuvimos un problema para completar su solicitud</h5>
+        <h5>{$MsjError}</h5>
+        <a class="badge badge-primary text-wrap" style="width: 6rem;" href="./"> Volver al Inicio <a>
     </div>
 {include file="footer.tpl"}
