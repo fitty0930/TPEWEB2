@@ -14,23 +14,22 @@
             $this->authHelper = new AuthHelper();
             $this->modelCtrlcuentas = new CtrlcuentasModel(); 
             $this->modelCategoria = new CategoriaModel(); // categoria
-            $this->viewCtrlcuentas= new CtrlcuentasView();
+            $globalCategorias= $this->modelCategoria->getCategorias();
+            $this->viewCtrlcuentas= new CtrlcuentasView($globalCategorias);
             $this->authHelper->isAdmin(); // MIRARLO
         }
 
         // CONTROL DE CUENTAS
         public function mostrarCuentas(){ 
             $usuarios= $this->modelCtrlcuentas->getUsuarios();
-            $categorias= $this->modelCategoria->getCategorias();
-            $this->viewCtrlcuentas->mostrarUsuarios($usuarios, $categorias);
+            $this->viewCtrlcuentas->mostrarUsuarios($usuarios);
         }
 
         public function borrarCuentas($params=NULL){
             $id_usuario = $params[':ID'];
-            $categorias= $this->modelCategoria->getCategorias();
             $usuario= $this->modelCtrlcuentas->getUsuarioID($id_usuario);
             if($usuario->admin!=0){
-                $this->viewCtrlcuentas->msjError('Quite los permisos antes de eliminar a un administrador', $categorias);
+                $this->viewCtrlcuentas->msjError('Quite los permisos antes de eliminar a un administrador');
                 die();
             }
             $this->modelCtrlcuentas->borrarUsuario($id_usuario);
@@ -39,7 +38,6 @@
 
         public function darPermisos($params=NULL){
             $id_usuario= $params[':ID'];
-            $categorias= $this->modelCategoria->getCategorias();
             $usuario= $this->modelCtrlcuentas->getUsuarioID($id_usuario);
             if($usuario->admin!=0){
                 $this->modelCtrlcuentas->darPermisos(0, $id_usuario);

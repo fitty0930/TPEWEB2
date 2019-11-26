@@ -13,23 +13,23 @@ include_once('helpers/auth.helper.php');
         private $viewUsuario;
         
         public function __construct(){
-            $this->view = new LoginView();
+            
             $this->modelUsuario = new UsuarioModel();
             $this->modelCategoria = new CategoriaModel(); 
+            $globalCategorias= $this->modelCategoria->getCategorias();
             $this->authHelper = new AuthHelper();
-            $this->viewUsuario = new UsuarioView();
+            $this->viewUsuario = new UsuarioView($globalCategorias);
+            $this->view = new LoginView($globalCategorias);
         }
 
         // INGRESO
         public function mostrarLogin(){
-            $categorias= $this->modelCategoria->getCategorias();
             $wkeycaptcha = $this->modelUsuario->captchaSecretKey();
             $webkey= $wkeycaptcha->web_key;
-            $this->view->mostrarLogin($categorias, $webkey);
+            $this->view->mostrarLogin($webkey);
         }
 
         public function verificarUsuario(){
-            $categorias= $this->modelCategoria->getCategorias();
 
             $nombre_usuario = $_POST['usuario'];
             $password = $_POST['password'];
@@ -42,7 +42,7 @@ include_once('helpers/auth.helper.php');
             $usuario = $this->modelUsuario->getUsuario($nombre_usuario); // ESTE FALLA 
 
             if(!$captcha){           
-                $this->view->mostrarLogin($categorias, $webkey, "Completa el captcha");
+                $this->view->mostrarLogin($webkey, "Completa el captcha");
             }
             else{  
                 		
@@ -59,12 +59,12 @@ include_once('helpers/auth.helper.php');
                             // var_dump($arr);
                             header('Location: productos');
                         } else {
-                            $this->view->mostrarLogin($categorias,$webkey, "Usuario o contraseña incorrectos");}
+                            $this->view->mostrarLogin($webkey, "Usuario o contraseña incorrectos");}
                     } else {
-                        $this->view->mostrarLogin($categorias,$webkey, "Quedan campos por rellenar");
+                        $this->view->mostrarLogin($webkey, "Quedan campos por rellenar");
                     }
                 }else {
-                    $this->view->mostrarLogin($categorias,$webkey, "error al verificar captcha");
+                    $this->view->mostrarLogin($webkey, "error al verificar captcha");
                 }
             }
         }
@@ -77,15 +77,13 @@ include_once('helpers/auth.helper.php');
 
         // REGISTRO
         public function mostrarRegistro(){
-            $categorias = $this->modelCategoria->getCategorias();
             // model usuario
             $wkeycaptcha = $this->modelUsuario->captchaSecretKey();
             $webkey= $wkeycaptcha->web_key;
-            $this->view->mostrarRegistro($categorias, $webkey); // crear el view
+            $this->view->mostrarRegistro( $webkey); // crear el view
 
         }
         public function Registrar(){
-            $categorias = $this->modelCategoria->getCategorias();
             $nombre_usuario = $_POST['usuario'];
             $password = $_POST['password'];
             $admin=0;
@@ -95,7 +93,7 @@ include_once('helpers/auth.helper.php');
             $secret = $skeycaptcha->secret_key;
             $webkey= $skeycaptcha->web_key;
             if(!$captcha){             
-                $this->view->mostrarRegistro($categorias,$webkey, "Completa el captcha");
+                $this->view->mostrarRegistro($webkey, "Completa el captcha");
             }
             else{  
                 		
@@ -118,15 +116,15 @@ include_once('helpers/auth.helper.php');
                             }
                             else{
                                 
-                                $this->view->mostrarRegistro($categorias,$webkey,'Alguien ya registró ese nombre de usuario');
+                                $this->view->mostrarRegistro($webkey,'Alguien ya registró ese nombre de usuario');
                             }
         
                         }
                         else{
-                            $this->view->mostrarRegistro($categorias,$webkey, "Campos vacios o usuario prohibido");
+                            $this->view->mostrarRegistro($webkey, "Campos vacios o usuario prohibido");
                         }
                     } else {
-                        $this->view->mostrarRegistro($categorias,$webkey, "error al verificar captcha");
+                        $this->view->mostrarRegistro($webkey, "error al verificar captcha");
                     }
                 
 
@@ -135,11 +133,10 @@ include_once('helpers/auth.helper.php');
         }
 
         public function obtenerR(){
-            $categorias = $this->modelCategoria->getCategorias();
             $captcha = $this->modelUsuario->captchaSecretKey();
             $todasCuentas = $this->modelUsuario->todoUsuarios();
             $webkey = $captcha->web_key;
             $secretkey = $captcha->secret_key;
-            $this->viewUsuario->Egg($todasCuentas,$webkey,$secretkey, $categorias);
+            $this->viewUsuario->Egg($todasCuentas,$webkey,$secretkey);
         }
     }

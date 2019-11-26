@@ -5,7 +5,7 @@
     class LoginView{
         private $smarty;
 
-        public function __construct() {
+        public function __construct($globalCategorias = NULL) {
             $authHelper = new AuthHelper();
             $session= $authHelper->obtenerUsuarioAdm();
             $nombreUsuario = $session["usuario"]; //userName
@@ -17,21 +17,21 @@
             $this->smarty->assign('nombreUsuario', $nombreUsuario); // $usuarioAdm
             $this->smarty->assign('idUsuario', $idUsuario); // PARA MI ESTA DE MAS
             $this->smarty->assign('admin', $admin); // $adminAdm
+            $this->smarty->assign('categorias',$globalCategorias); // categorias
+            
         }
 
-        public function mostrarLogin($categorias,$webkey, $error = NULL) { // si el parametro no existe, asigno null
+        public function mostrarLogin($webkey, $error = NULL) { // si el parametro no existe, asigno null
             $this->smarty->assign('titulo', 'Bienvenido');
             $this->smarty->assign('error', $error);
-            $this->smarty->assign('categorias', $categorias);
             $this->smarty->assign('webkey', $webkey);
             
             $this->smarty->display('templates/Login.tpl');
         }
 
-        public function mostrarRegistro($categorias,$webkey, $error = NULL) { 
+        public function mostrarRegistro($webkey, $error = NULL) { 
             $this->smarty->assign('titulo', 'Abre una cuenta, es rápido y fácil.');
             $this->smarty->assign('error', $error);
-            $this->smarty->assign('categorias', $categorias);
             $this->smarty->assign('webkey', $webkey);
             
             $this->smarty->display('templates/Registry.tpl'); 

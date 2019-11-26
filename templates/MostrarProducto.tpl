@@ -1,6 +1,10 @@
 {include 'templates/header.tpl'}  
 <div class="container" data-id_producto = "{$producto->id_producto}">
+     {if $admin}
      <h3> <a href="edicionproducto/{$producto->id_producto}"> {$producto->producto} </a> </h3>
+     {else}
+     <h3> <p> {$producto->producto} </p> </h3>
+     {/if}
           <ul class="list-group">    
                <li class="list-group-item">
                     Marca: {$producto->marca}
@@ -24,7 +28,7 @@
         
         {/if}
      {/if}
-          <div class="col-md-6">
+          <div class="col-md-12">
           <ul class="list-group">
                {foreach from=$imagenes item=imagen}
                     <li class="list-group-item">
@@ -33,7 +37,7 @@
                          
                     {/if}
                     
-                    <img  class="img-reduc img-fluid img-reduct img-thumbnail" src="{$imagen->ruta}" class="d-block w-100 h-100" alt="img">
+                    <img  class="img-reduc img-fluid img-reduct img-thumbnail" src="{$imagen->ruta}" class="img-responsive d-block w-100 h-100" alt="img">
                     </li>
                {/foreach}
                

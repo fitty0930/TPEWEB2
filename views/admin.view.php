@@ -7,7 +7,7 @@
         private $smarty;
 
 
-        public function __construct(){
+        public function __construct($globalCategorias = NULL){
             $authHelper = new AuthHelper();
             $session= $authHelper->obtenerUsuarioAdm();
             $nombreUsuario = $session["usuario"]; //userName
@@ -19,23 +19,22 @@
             $this->smarty->assign('nombreUsuario', $nombreUsuario); // $usuarioAdm
             $this->smarty->assign('idUsuario', $idUsuario); // PARA MI ESTA DE MAS
             $this->smarty->assign('admin', $admin); // $adminAdm
+            $this->smarty->assign('categorias',$globalCategorias); // categorias
         }
         
 
-        public function editarProducto($producto, $categorias, $selector){ 
+        public function editarProducto($producto, $selector){ 
             // var_dump($producto);
             $this->smarty->assign('titulo', 'Editar '.$producto->producto);
             $this->smarty->assign('producto', $producto);
             $this->smarty->assign('selector', $selector);
-            $this->smarty->assign('categorias', $categorias);
             $this->smarty->display('templates/editarProducto.tpl');
         }
         
 
-        public function editarCategoria($categoria, $categorias){ 
+        public function editarCategoria($categoria){ 
             $this->smarty->assign('titulo', 'edit'.$categoria->nombre);
             $this->smarty->assign('categoria', $categoria);
-            $this->smarty->assign('categorias', $categorias);
             $this->smarty->display('templates/editarCategoria.tpl');
         }
 

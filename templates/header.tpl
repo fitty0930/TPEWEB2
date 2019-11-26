@@ -12,7 +12,7 @@
             {* vue *}
             <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
             {* mi js *}
-            <script src="js/script.js"></script>
+            <script src="js/comentarios.js"></script>
 
             {* TITULO DE LA PAGINA *}
             <title>{$titulo}</title>

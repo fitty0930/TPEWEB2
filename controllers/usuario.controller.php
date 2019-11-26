@@ -13,16 +13,16 @@
         public function __construct(){
             $this->modelProducto = new ProductoModel();
             $this->modelCategoria = new CategoriaModel();
+            $globalCategorias= $this->modelCategoria->getCategorias();
             $this->modelImagen= new ImagenModel();
-            $this->view = new UsuarioView();
+            $this->view = new UsuarioView($globalCategorias);
             
         }
 
         // PRODUCTOS
         public function mostrarProductos(){
             $productos = $this->modelProducto->getProductos();
-            $categorias= $this->modelCategoria->getCategorias();
-            $this->view->mostrarProductos($productos, $categorias);
+            $this->view->mostrarProductos($productos);
         }
 
         
@@ -32,11 +32,10 @@
             // var_dump($id_producto);
             // var_dump($producto);
             $imagenes = $this->modelImagen->getImgProducto($id_producto);
-            $categorias = $this->modelCategoria->getCategorias();
             if($producto){
-                $this->view->mostrarProducto($producto, $categorias, $imagenes);} // AGREGA IMAGENES
+                $this->view->mostrarProducto($producto, $imagenes);} // AGREGA IMAGENES
             else{
-                $this->view->msjError("No se encontró su producto", $categorias); 
+                $this->view->msjError("No se encontró su producto"); 
             }
         }
         
@@ -50,14 +49,13 @@
         public function mostrarCategoria($params = NULL){ 
             $id_categoria = $params[':ID'];
             $categoria= $this->modelCategoria->Get($id_categoria);
-            $categorias= $this->modelCategoria->getCategorias();
             // aca
             $productoporcategoria= $this->modelProducto->getProductoPorCategoria($id_categoria);
             // var_dump($productoporcategoria);
             if($categoria){
-                $this->view->filtradoCategoria($categoria, $categorias, $productoporcategoria);}
+                $this->view->filtradoCategoria($categoria, $productoporcategoria);}
             else{
-                $this->view->msjError('No existe tal categoria',$categorias);}
+                $this->view->msjError('No existe tal categoria');}
         }
 
         

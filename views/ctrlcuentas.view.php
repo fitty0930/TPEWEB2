@@ -7,7 +7,7 @@ require_once('helpers/auth.helper.php');
         private $smarty;
 
         // MIRA EL CONSTRUCT PLS
-        public function __construct(){
+        public function __construct($globalCategorias = NULL){
                 $authHelper = new AuthHelper();
                 $session= $authHelper->obtenerUsuarioAdm();
                 $nombreUsuario = $session["usuario"]; 
@@ -20,19 +20,18 @@ require_once('helpers/auth.helper.php');
                 $this->smarty->assign('idUsuario', $idUsuario); 
                 $this->smarty->assign('admin', $admin); 
                 $this->smarty->assign('administraAlgo',$administraAlgo);
+                $this->smarty->assign('categorias',$globalCategorias); // categorias
         }
 
-        public function mostrarUsuarios($usuarios, $categorias){ 
+        public function mostrarUsuarios($usuarios){ 
             $this->smarty->assign('titulo', 'Usuarios');
             $this->smarty->assign('usuarios', $usuarios);
-            $this->smarty->assign('categorias', $categorias);
             $this->smarty->display('templates/mostrarCuentas.tpl'); 
         }
 
         
-        public function msjError($MsjError, $categorias) { // para error
+        public function msjError($MsjError) { // para error
             $this->smarty->assign('titulo', 'Dificultades tecnicas');
-            $this->smarty->assign('categorias', $categorias);
             $this->smarty->assign('MsjError', $MsjError);
             $this->smarty->display('templates/mostrarError.tpl'); 
         }

@@ -19,33 +19,31 @@
             $this->authHelper = new AuthHelper();
             $this->modelProducto= new ProductoModel();
             $this->modelCategoria= new CategoriaModel();
-            $this->viewAdmin= new AdminView();
-            $this->viewUser= new UsuarioView();
+            $globalCategorias= $this->modelCategoria->getCategorias();
+            $this->viewAdmin= new AdminView($globalCategorias);
+            $this->viewUser= new UsuarioView($globalCategorias);
             $this->modelImagen= new ImagenModel();
         }
         
         // PRODUCTOS
         public function mostrarProductos(){
             $productos = $this->modelProducto->getProductos();
-            $categorias= $this->modelCategoria->getCategorias();
             $this->viewUser->mostrarProductos($productos, $categorias);
         }
 
         public function mostrarProducto($id_producto){ 
             // var_dump($id_producto);
-            $producto = $this->modelProducto->getProductosID($id_producto);  
-            $categorias = $this->modelCategoria->getCategorias();
+            $producto = $this->modelProducto->getProductosID($id_producto);
             if($producto){
-                $this->viewUser->mostrarProducto($producto, $categorias);}
+                $this->viewUser->mostrarProducto($producto);}
             else{
-                $this->viewUser->msjError('No se encontró su producto ',$categorias); // por id
+                $this->viewUser->msjError('No se encontró su producto '); // por id
             }
         }
 
         public function agregarProducto(){
             $this->authHelper->isAdmin();
 
-            $categorias= $this->modelCategoria->getCategorias();
 
             $id_categoria = $_POST['categoria']; 
             $producto = $_POST['producto'];
@@ -59,7 +57,7 @@
                 $this->guardarImagen($id_producto);
                 header("Location: productos"); // lo pateo a home
             } else{
-            $this->viewUser->msjError('Faltan campos,esto antes estaba mal ',$categorias); }
+            $this->viewUser->msjError('Faltan campos por rellenar'); }
         }
 
 
@@ -80,12 +78,11 @@
             $this->authHelper->isAdmin();
             $producto = $this->modelProducto->Get($id_producto); // no tocarlo se usa solo aca
             // var_dump($producto);
-            $categorias = $this->modelCategoria->getCategorias();
             $selector =$this->modelProducto->getProductosID($id_producto);
             if($producto)
-                $this->viewAdmin->editarProducto($producto, $categorias, $selector);
+                $this->viewAdmin->editarProducto($producto, $selector);
             else
-                $this->viewUser->msjError('No se pudo encontrar el ID de su producto',$categorias);
+                $this->viewUser->msjError('No se pudo encontrar el ID de su producto');
         }
 
 
@@ -97,14 +94,13 @@
             $producto = $_POST['producto'];
             $marca = $_POST['marca'];
             $precio = $_POST['precio'];
-            $categorias = $this->modelCategoria->getCategorias();
 
             if ((!empty($producto)) && (!empty($marca)) && (!empty($precio))  && (!empty($id_categoria))){
                 $this->guardarImagen($id_producto); // guardarImagen
                 $this->modelProducto->editarProducto($id_producto, $id_categoria, $producto, $marca, $precio);
                header("Location: ../productos/$id_producto");
             } else
-            $this->viewUser->msjError("Datos insuficientes",$categorias);
+            $this->viewUser->msjError("Datos insuficientes");
         }
 
         // CATEGORIAS
@@ -117,13 +113,12 @@
         public function agregarCategoria(){ 
             $this->authHelper->isAdmin();
             $nombre= $_POST['nombre']; 
-            $categorias = $this->modelCategoria->getCategorias();
             if(!empty($nombre)){
                 $this->modelCategoria->agregarCategoria($nombre);
                 header('Location: categorias');
             }
             else
-            $this->viewUser->msjError("No se pudo agregar categoria",$categorias);
+            $this->viewUser->msjError("No se pudo agregar categoria");
         }
 
 
@@ -131,13 +126,12 @@
             $id_categoria= $params[':ID'];
             $this->authHelper->isAdmin();
 
-            $categorias = $this->modelCategoria->getCategorias();
             $puedoBorrar=$this->modelProducto->getProductoPorCategoria($id_categoria);
             if($puedoBorrar==[]){
             $this->modelCategoria->borrarCategoria($id_categoria);
             header('Location: ../categorias');}
             else{
-            $this->viewUser->msjError('No puede borrar categorias que tengan productos, elimine los productos para poder eliminar la categoria',$categorias);
+            $this->viewUser->msjError('No puede borrar categorias que tengan productos, elimine los productos para poder eliminar la categoria');
             }
         }
 
@@ -147,18 +141,17 @@
             $this->authHelper->isAdmin();
 
             $categoria = $this->modelCategoria->get($id_categoria);
-            $categorias = $this->modelCategoria->getCategorias();
+            
             if($categoria)
-            $this->viewAdmin->editarCategoria($categoria, $categorias);
+            $this->viewAdmin->editarCategoria($categoria);
             else
-            $this->viewUser->msjError('No se pudo encontrar el ID de su categoria',$categorias);
+            $this->viewUser->msjError('No se pudo encontrar el ID de su categoria');
         }
 
 
         public function editarCategoriaSelec($params = NULL){
             $id_categoria= $params[':ID'];
             $this->authHelper->isAdmin();
-            $categorias = $this->modelCategoria->getCategorias();
             $nombre= $_POST['nombre'];
 
             if(!empty($nombre)){
@@ -166,7 +159,7 @@
                 header("Location: ../categorias");
             }
             else{
-                $this->viewUser->msjError("Por favor  ingrese un nombre",$categorias);
+                $this->viewUser->msjError("Por favor  ingrese un nombre");
             }
         }
 
