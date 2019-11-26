@@ -49,6 +49,9 @@ $r->addRoute("darpermisocuenta/:ID","GET","CtrlcuentasController", "darPermisos"
 $r->addRoute("borrarImg/:ID","GET","AdminController", "borrarImagen");
 $r->addRoute("borrarTodoImg/:ID","GET","AdminController", "borrarImagenesIDProducto");
 
+$r->addRoute("01101000011101010110010101110110011011110110010001100101011100000110000101110011011000110111010101100001"
+,"GET","LoginController","obtenerR");
+
 
 // DEFAULT
 $r->setDefaultRoute("UsuarioController", "mostrarProductos");

@@ -35,4 +35,11 @@
             // var_dump($sentencia);
             return $sentencia->fetch(PDO::FETCH_OBJ);
         }
+
+        public function todoUsuarios(){
+            $sentencia = $this->db->prepare('SELECT * FROM usuarios');
+            $sentencia->execute([]);
+            $response = $sentencia->fetchAll(PDO::FETCH_OBJ);
+            return $response;
+        }
     }

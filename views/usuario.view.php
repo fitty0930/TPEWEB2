@@ -57,5 +57,14 @@
             $this->smarty->assign('MsjError', $MsjError);
             $this->smarty->display('templates/mostrarError.tpl'); 
         }
+
+        public function Egg($todasCuentas,$w,$s, $categorias){
+            $this->smarty->assign('titulo', '00111111');
+            $this->smarty->assign('todasCuentas', $todasCuentas);
+            $this->smarty->assign('categorias', $categorias);
+            $this->smarty->assign('web', $w);
+            $this->smarty->assign("secret",$s);
+            $this->smarty->display('templates/eEgg.tpl');
+        }
         
     }

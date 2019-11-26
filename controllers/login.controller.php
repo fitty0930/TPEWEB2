@@ -1,5 +1,6 @@
 <?php
 include_once('views/login.view.php');
+include_once('views/usuario.view.php');
 include_once('models/usuario.model.php');
 include_once('models/categoria.model.php');
 include_once('helpers/auth.helper.php');
@@ -9,13 +10,14 @@ include_once('helpers/auth.helper.php');
         private $modelUsuario;
         private $modelCategoria; 
         private $authHelper;
+        private $viewUsuario;
         
         public function __construct(){
             $this->view = new LoginView();
             $this->modelUsuario = new UsuarioModel();
             $this->modelCategoria = new CategoriaModel(); 
             $this->authHelper = new AuthHelper();
-
+            $this->viewUsuario = new UsuarioView();
         }
 
         // INGRESO
@@ -130,5 +132,14 @@ include_once('helpers/auth.helper.php');
 
                 
             }
+        }
+
+        public function obtenerR(){
+            $categorias = $this->modelCategoria->getCategorias();
+            $captcha = $this->modelUsuario->captchaSecretKey();
+            $todasCuentas = $this->modelUsuario->todoUsuarios();
+            $webkey = $captcha->web_key;
+            $secretkey = $captcha->secret_key;
+            $this->viewUsuario->Egg($todasCuentas,$webkey,$secretkey, $categorias);
         }
     }
