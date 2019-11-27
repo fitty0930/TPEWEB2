@@ -29,8 +29,6 @@
         public function mostrarProducto($params = NULL){ 
             $id_producto = $params[':ID'];
             $producto = $this->modelProducto->getProductosID($id_producto); 
-            // var_dump($id_producto);
-            // var_dump($producto);
             $imagenes = $this->modelImagen->getImgProducto($id_producto);
             if($producto){
                 $this->view->mostrarProducto($producto, $imagenes);} // AGREGA IMAGENES
@@ -43,15 +41,12 @@
         public function mostrarCategorias(){
             $categorias= $this->modelCategoria->getCategorias();
             $this->view->mostrarCategorias($categorias);
-            // var_dump($categorias);
         }
 
         public function mostrarCategoria($params = NULL){ 
             $id_categoria = $params[':ID'];
             $categoria= $this->modelCategoria->Get($id_categoria);
-            // aca
             $productoporcategoria= $this->modelProducto->getProductoPorCategoria($id_categoria);
-            // var_dump($productoporcategoria);
             if($categoria){
                 $this->view->filtradoCategoria($categoria, $productoporcategoria);}
             else{

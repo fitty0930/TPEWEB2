@@ -34,12 +34,10 @@ include_once('helpers/auth.helper.php');
             $nombre_usuario = $_POST['usuario'];
             $password = $_POST['password'];
             $captcha = $_POST['g-recaptcha-response'];
-            // var_dump($captcha);
             $skeycaptcha = $this->modelUsuario->captchaSecretKey();
-            // var_dump($skeycaptcha->secret_key);
             $secret = $skeycaptcha->secret_key;
             $webkey= $skeycaptcha->web_key;
-            $usuario = $this->modelUsuario->getUsuario($nombre_usuario); // ESTE FALLA 
+            $usuario = $this->modelUsuario->getUsuario($nombre_usuario);
 
             if(!$captcha){           
                 $this->view->mostrarLogin($webkey, "Completa el captcha");
@@ -54,9 +52,8 @@ include_once('helpers/auth.helper.php');
 
                     if (!empty($nombre_usuario) && !empty($password)) {
                         
-                        if ($usuario && password_verify($password, $usuario->password)) { // no es isset porque veo el resultado de $usuario 
+                        if ($usuario && password_verify($password, $usuario->password)) { 
                             $this->authHelper->Login($usuario);
-                            // var_dump($arr);
                             header('Location: productos');
                         } else {
                             $this->view->mostrarLogin($webkey, "Usuario o contraseña incorrectos");}
@@ -77,10 +74,9 @@ include_once('helpers/auth.helper.php');
 
         // REGISTRO
         public function mostrarRegistro(){
-            // model usuario
             $wkeycaptcha = $this->modelUsuario->captchaSecretKey();
             $webkey= $wkeycaptcha->web_key;
-            $this->view->mostrarRegistro( $webkey); // crear el view
+            $this->view->mostrarRegistro( $webkey);
 
         }
         public function Registrar(){
@@ -89,7 +85,6 @@ include_once('helpers/auth.helper.php');
             $admin=0;
             $captcha = $_POST['g-recaptcha-response'];
             $skeycaptcha = $this->modelUsuario->captchaSecretKey();
-            // var_dump($skeycaptcha->secret_key);
             $secret = $skeycaptcha->secret_key;
             $webkey= $skeycaptcha->web_key;
             if(!$captcha){             
@@ -100,16 +95,15 @@ include_once('helpers/auth.helper.php');
                     $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha");
                     
                     $arr = json_decode($response, TRUE);
-                    // var_dump($arr);
                     if($arr['success']){
                         if (!empty($nombre_usuario) && !empty($password) && ($nombre_usuario!="administrador")) {
 
-                            $yaesUsuario = $this->modelUsuario->getUsuario($nombre_usuario); // 
+                            $yaesUsuario = $this->modelUsuario->getUsuario($nombre_usuario); 
         
                             if(!$yaesUsuario){
                                 $hash= password_hash($password, PASSWORD_DEFAULT);
                                 $this->modelUsuario->Registrar($nombre_usuario, $hash, $admin);
-                                $usuario= $this->modelUsuario->getUsuario($nombre_usuario);// buscar
+                                $usuario= $this->modelUsuario->getUsuario($nombre_usuario);
         
                                 $this->authHelper->Login($usuario);
                                 header('Location: productos');

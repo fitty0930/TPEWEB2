@@ -8,20 +8,20 @@
         public function __construct($globalCategorias = NULL) {
             $authHelper = new AuthHelper();
             $session= $authHelper->obtenerUsuarioAdm();
-            $nombreUsuario = $session["usuario"]; //userName
+            $nombreUsuario = $session["usuario"]; 
             $idUsuario = $session["id_usuario"];
             $admin = $authHelper->obtenerAdminAdm();
 
             $this->smarty = new Smarty();
             $this->smarty->assign('basehref', BASE_URL);
-            $this->smarty->assign('nombreUsuario', $nombreUsuario); // $usuarioAdm
-            $this->smarty->assign('idUsuario', $idUsuario); // PARA MI ESTA DE MAS
-            $this->smarty->assign('admin', $admin); // $adminAdm
-            $this->smarty->assign('categorias',$globalCategorias); // categorias
+            $this->smarty->assign('nombreUsuario', $nombreUsuario); 
+            $this->smarty->assign('idUsuario', $idUsuario); 
+            $this->smarty->assign('admin', $admin); 
+            $this->smarty->assign('categorias',$globalCategorias);
             
         }
 
-        public function mostrarLogin($webkey, $error = NULL) { // si el parametro no existe, asigno null
+        public function mostrarLogin($webkey, $error = NULL) { 
             $this->smarty->assign('titulo', 'Bienvenido');
             $this->smarty->assign('error', $error);
             $this->smarty->assign('webkey', $webkey);

@@ -6,7 +6,7 @@ require_once('helpers/auth.helper.php');
         
         private $smarty;
 
-        // MIRA EL CONSTRUCT PLS
+        
         public function __construct($globalCategorias = NULL){
                 $authHelper = new AuthHelper();
                 $session= $authHelper->obtenerUsuarioAdm();
@@ -20,7 +20,7 @@ require_once('helpers/auth.helper.php');
                 $this->smarty->assign('idUsuario', $idUsuario); 
                 $this->smarty->assign('admin', $admin); 
                 $this->smarty->assign('administraAlgo',$administraAlgo);
-                $this->smarty->assign('categorias',$globalCategorias); // categorias
+                $this->smarty->assign('categorias',$globalCategorias); 
         }
 
         public function mostrarUsuarios($usuarios){ 

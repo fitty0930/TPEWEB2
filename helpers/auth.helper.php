@@ -27,7 +27,6 @@
         public function isAdmin(){
             $this->checkLoggedIn();
             if($_SESSION['admin'] == 0){
-                // darle una respuesta negativa
                 header('Location:'. HOME);
                 die();
             }

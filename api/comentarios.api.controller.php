@@ -53,7 +53,6 @@ class ApiController{
     }
 
     public function borrarComentario($params = NULL){
-        // $this->authHelper->isAdmin();
         $id_comentario = $params[':ID'];
         $comentario = $this->modelComentario->Get($id_comentario);
         if($comentario){
