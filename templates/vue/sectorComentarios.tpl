@@ -11,11 +11,11 @@
                 <button id="btn-ordenar-asc" type="button" class="btn btn-danger btn-sm"> Los peores primero </button>
             </div>
             
-            <div v-if="loading" class="card-body">
+            <div v-if="cargando" class="card-body">
                 Cargando...
             </div>
             
-            <ul v-if="!loading" class="list-group">
+            <ul v-else class="list-group">
                 <div  v-if= "!comentarios[0]">
                     <p> todavia nadie dio su opinion, se el primero... </p>
                 </div>

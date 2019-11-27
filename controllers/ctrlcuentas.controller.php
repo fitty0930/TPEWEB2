@@ -28,7 +28,7 @@
         public function borrarCuentas($params=NULL){
             $id_usuario = $params[':ID'];
             $usuario= $this->modelCtrlcuentas->getUsuarioID($id_usuario);
-            if($usuario->admin!=0){
+            if($usuario->admin){
                 $this->viewCtrlcuentas->msjError('Quite los permisos antes de eliminar a un administrador');
                 die();
             }

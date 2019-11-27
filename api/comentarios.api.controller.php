@@ -34,7 +34,6 @@ class ApiController{
         $id_producto = $params[':ID'];
         $productoComentarios = $this->modelProducto->Get($id_producto);
         if($productoComentarios){
-            $this->modelCategoria->getCategorias();
             $comentarios = $this->modelComentario->obtenerComentariosDelProducto($id_producto);
             $this->viewJSON->response($comentarios, 200);
         }else{

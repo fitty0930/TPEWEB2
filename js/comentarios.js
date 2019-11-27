@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
         el: "#comentarios-api",
         data: {
             title: "Lista de comentarios",
-            loading: false,
+            cargando: false,
             comentarios: [],
             promedio: 0
         },
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function(){
         function getComentarios(){
             let id_producto = document.querySelector(".container").dataset.id_producto;
             // console.log(id_producto);
-            app.loading = true;
+            app.cargando = true;
             let urlencoded = encodeURI("api/productos/"+id_producto+"/comentarios")
             fetch(urlencoded)
             .then(response => {
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function(){
             .then(comentarios => {
                 app.comentarios = comentarios;
                 app.promedio = promedioCom(comentarios);
-                app.loading = false;
+                app.cargando = false;
             })
             .catch(error => console.log(error));
         };
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function(){
         function getComentariosPtsOrdDesc(){
             let id_producto = document.querySelector(".container").dataset.id_producto;
             // console.log(id_producto);
-            app.loading = true;
+            app.cargando = true;
             let urlencoded = encodeURI("api/productos/"+id_producto+"/comentariosdesc")
             fetch(urlencoded)
             .then(response => {
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function(){
             .then(comentarios => {
                 app.comentarios = comentarios;
                 app.promedio = promedioCom(comentarios);
-                app.loading = false;
+                app.cargando = false;
             })
             .catch(error => console.log(error));
         };
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function(){
         function getComentariosPtsOrdAsc(){
             let id_producto = document.querySelector(".container").dataset.id_producto;
             // console.log(id_producto);
-            app.loading = true;
+            app.cargando = true;
             let urlencoded = encodeURI("api/productos/"+id_producto+"/comentariosasc")
             fetch(urlencoded)
             .then(response => {
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function(){
             .then(comentarios => {
                 app.comentarios = comentarios;
                 app.promedio = promedioCom(comentarios);
-                app.loading = false;
+                app.cargando = false;
             })
             .catch(error => console.log(error));
         };
