@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function(){
     let app = new Vue({
         el: "#comentarios-api",
         data: {
-            title: "Lista de comentarios",
+            titulo: "Comentarios",
             cargando: false,
             comentarios: [],
             promedio: 0

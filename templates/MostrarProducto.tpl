@@ -20,7 +20,6 @@
 <div class="container">
      <div class="col-md-12">
      <input hidden disabled value="{$producto->id_producto}" type="text" class="id_producto"> 
-          {*  *}
      {if $imagenes}
         {if $admin}
         <br>

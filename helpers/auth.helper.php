@@ -40,7 +40,7 @@
                 return NULL;
             }
             
-            return $_SESSION; // $_SESSION['usuario']
+            return $_SESSION; 
         }
 
         public function obtenerAdminAdm(){ 
