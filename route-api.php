@@ -9,8 +9,8 @@ define("CATEGORIAS", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT
 $r = new Router();
 
 $r->addRoute("productos/:ID/comentarios", "GET", "ApiController", "obtenerComentariosDelProducto");
-$r->addRoute("productos/:ID/comentariosdesc", "GET", "ApiController", "obtenerComentariosDelProductoPtsMejores");
-$r->addRoute("productos/:ID/comentariosasc", "GET", "ApiController", "obtenerComentariosDelProductoPtsPeores");
+$r->addRoute("productos/:ID/comentarios/order=desc", "GET", "ApiController", "obtenerComentariosDelProductoPtsMejores");
+$r->addRoute("productos/:ID/comentarios/order=asc", "GET", "ApiController", "obtenerComentariosDelProductoPtsPeores");
 $r->addRoute("comentarios", "POST", "ApiController", "agregarComentario");
 $r->addRoute("comentarios/:ID", "DELETE", "ApiController", "borrarComentario");
 

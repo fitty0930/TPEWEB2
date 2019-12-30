@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function(){
             let id_producto = document.querySelector(".container").dataset.id_producto;
             // console.log(id_producto);
             app.cargando = true;
-            let urlencoded = encodeURI("api/productos/"+id_producto+"/comentariosdesc")
+            let urlencoded = encodeURI("api/productos/"+id_producto+"/comentarios/order=desc")
             fetch(urlencoded)
             .then(response => {
                 if (!response.ok) { console.log("error"); } else { return response.json()}})
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function(){
             let id_producto = document.querySelector(".container").dataset.id_producto;
             // console.log(id_producto);
             app.cargando = true;
-            let urlencoded = encodeURI("api/productos/"+id_producto+"/comentariosasc")
+            let urlencoded = encodeURI("api/productos/"+id_producto+"/comentarios/order=asc")
             fetch(urlencoded)
             .then(response => {
                 if (!response.ok) { console.log("error"); } else { return response.json()}})
