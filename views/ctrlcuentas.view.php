@@ -10,9 +10,16 @@ require_once('helpers/auth.helper.php');
         public function __construct($globalCategorias = NULL){
                 $authHelper = new AuthHelper();
                 $session= $authHelper->obtenerUsuarioAdm();
-                $nombreUsuario = $session["usuario"]; 
-                $idUsuario = $session["id_usuario"];
-                $admin = $authHelper->obtenerAdminAdm();
+                if($session == NULL ){
+                    $nombreUsuario = NULL; 
+                    $idUsuario = NULL;
+                    $admin = NULL;
+                } 
+                else{
+                    $nombreUsuario = $session["usuario"]; 
+                    $idUsuario = $session["id_usuario"];
+                    $admin = $authHelper->obtenerAdminAdm();
+                }
                 $administraAlgo = 0;
                 $this->smarty = new Smarty();
                 $this->smarty->assign('basehref', BASE_URL);
