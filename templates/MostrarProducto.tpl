@@ -50,4 +50,6 @@
           {include 'vue/sectorComentarios.tpl'}
      </div>
 </div>
+{* mi js *}
+<script src="js/comentarios.js"></script>
 {include 'templates/footer.tpl'} 
