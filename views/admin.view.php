@@ -4,7 +4,7 @@
 
     class AdminView{
 
-        private $smarty;
+        private $smarty; // smarty
 
 
         public function __construct($globalCategorias = NULL){
