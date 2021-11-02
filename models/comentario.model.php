@@ -10,9 +10,9 @@
         }
 
         private function Connect(){ // hace la conexion
-            return new PDO('mysql:host=localhost;'
+            return new PDO('mysql:host=mysqldb;'
             .'dbname=db_tpe; charset=utf8' 
-            , 'root', '');// el primer root es el usuario y el segundo (vacio) la contraseña
+            , 'root', 'dockerRoshi');// el primer root es el usuario y el segundo (vacio) la contraseña
         }
         // comentarios id_comentario, texto, puntaje, id_producto, id_usuario
         public function Get($id_comentario){

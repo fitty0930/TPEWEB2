@@ -53,7 +53,7 @@
             // var_dump($id_categoria);
             if ((!empty($producto)) && (!empty($marca)) && (!empty($precio))  && (!empty($id_categoria)) ){
                 $id_producto= $this->modelProducto->agregarProducto($id_categoria, $producto, $marca, $precio);
-                var_dump($id_producto);
+                // var_dump($id_producto);
                 $this->guardarImagen($id_producto);
                 header("Location: productos"); // lo pateo a home
             } else{

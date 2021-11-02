@@ -8,9 +8,9 @@
         }
 
         private function Connect(){ // hace la conexion
-            return new PDO('mysql:host=localhost;'
+            return new PDO('mysql:host=mysqldb;'
             .'dbname=db_tpe; charset=utf8' 
-            , 'root', '');// el primer root es el usuario y el segundo (vacio) la contraseña
+            , 'root', 'dockerRoshi');// el primer root es el usuario y el segundo (vacio) la contraseña
         }
 
         public function getByUsername($username) { // aun sin modificar
